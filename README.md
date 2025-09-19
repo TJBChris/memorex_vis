@@ -40,7 +40,7 @@ VIS does not have support for character mode applications, CGA, or some EGA vide
 
 VIS runs a highly customized version of MS-DOS and Windows 3.1 collectively branded as Modular Windows.  Within Microsoft, Modular Windows was assigned the code name **Haiku**.  Though VIS uses the same basic DOS and Windows architecture as the IBM PC, the DOS and Windows implementations are **highly** customized.  
 
-From a DOS standpoint, many common INT 21H calls are modified, redirected, or unimplemnted.  There is no command interpreter.  A file named COMMAND.COM exists, but references VIS BIOS extensions rather than being a command interpreter.  Additionally, there is no writable file system in VIS.  As a result, many common MS-DOS calls for file handling are absent or behave differently than expected.  There are two available drive letters in VIS:
+From a DOS standpoint, many common INT 21H calls are modified, redirected, or unimplemnted.  There is no command interpreter.  A file named COMMAND exists in ROM, but references VIS BIOS extensions rather than being a command interpreter.  Additionally, there is no writable file system in VIS.  As a result, many common MS-DOS calls for file handling are absent or behave differently than expected.  There are two available drive letters in VIS:
 
 * **A:** - The CD-ROM drive.
 * **B:** - A redirector for executable code stored on the Save-It cartridge.  This was used during development of the VIS hardware.  The B: drive redirector presented one file (**CARD.EXE**) to MS-DOS if an executable Save-It cartridge was inserted.  The ability to boot from Save-It cartridges was removed from tbe BIOS in retail units.
