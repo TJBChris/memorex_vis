@@ -1,0 +1,84 @@
+#	Example VIS Start-up Control File for Single-Application Discs
+#	Copyright 1992 Tandy Corporation, All Rights Reserved
+#	Version 1(2)  25-Jul-92
+
+#	IMPORTANT:  This file must not be placed on the finished disc.
+#		    Doing so will violate your license agreement.
+#		    The CONTROL.TAT is the file to place on the disc.
+
+#	This file is used to specify the commands and/or programs necessary
+#	to start your application on a VIS system.
+
+#	The VIS menuing system is not available without a full VIS license.
+
+#	This section specifies the registration code for your product.
+#	Be sure that you use each registration code on a single title.
+#	Additional registration codes are available for additional titles.
+
+#	Enter the registration code exactly as it appears on the
+#	form you received.  If there are letters in the code, be sure you
+#	enter the letters in exactly the same case as they were on the
+#	registration form, ie Uppercase or Lowercase.
+
+#		12345678901234567890
+REGISTER	fF8BhHCk8*f!.U0(-&54
+
+
+#	This optional section allows the ISV to insert a title string
+#	into the CONTROL.TAT file.  It may be up to 63 characters in
+#	length, and when you TYPE the CONTROL.TAT file, the title string
+#	will be visible.
+
+#	 123456789012345678901234567890123456789012345678901234567890123
+TITLE	"The VIS Hackers Workbench - Version 1(1) 10-Nov-92"
+
+
+#	This next section defines the commands that will be performed by
+#	the system when your program is to be run.  Windows applications
+#	specify only the name of the directory containing a SYSTEM.INI for
+#	that particular program.   The Windows application and its 
+#	SYSTEM.INI may be placed in the root directory if you prefer.
+
+#	On the PROGRAM line, you may specify as many DOS commands as are
+#	needed to set up the environment, up to 120 characters.  Separate each
+#	command line with a '\r'.  When Windows applications are specified,
+#	you must use the syntax   minwin A:<directory path> [env1=parms ...]
+#	such as		minwin A:\\MYAPP env1=usemouse
+#	NOTE:  When a real backslash is needed in a command line, use two
+#	backslashes to indicate this.
+#	When the last command on the PROGRAM line terminates, the system
+#	will restart automatically.
+
+PROGRAM 1	"A:cardtal2.exe                                        "
+
+#	Here are some other examples of possible PROGRAM lines:
+#	PROGRAM 2	"A:second.exe /a /b /c:4"
+#	PROGRAM 3	"A:mouse.com /x:73 \rminwin A:\\thirddir"
+#	PROGRAM 4	"minwin A:\\fourth parm1=myparm"
+#	Remember, the double backslash on directory names are required.
+
+
+#	This optional section allows you to specify one or more buttons
+#	on the hand controller that the customer may press to start the 
+#	CD-player instead of the application outlined in PROGRAM 1.
+#	This should be used ONLY if your disc contains redbook audio
+#	tracks (mixed-mode) that are interesting to listen to by themselves.
+#	If there are no redbook tracks on your program disc, this parameter
+#	is ignored.
+
+BUTTON	3 0 CDPLAYER
+
+#	The above command means that the customer may press the "3" key
+#	on the hand controller when the VIS logo appears on the screen
+#	and the system will run the built-in CD-PLAYER application
+#	instead of the application.
+#	More than one key on the controller can be enabled for this task
+#	by adding additional BUTTON commands.
+#	Valid button codes are:  A B 1 2 3 4 N S E W
+
+
+#	This section indicates how many audio tracks are present,
+#	and what the first track is that contains audio.
+
+#	End of File
+
