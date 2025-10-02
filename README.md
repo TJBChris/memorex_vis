@@ -12,7 +12,7 @@ In my mind, it was one of three events to unfold during 1992 that caused Tandy t
 
 This repository contains the following folders.  See README.md within each folder for a listing of what's there.
 
-* **tandy** - Contains utilities, documents, and the like that were writtin by Tandy Corp.
+* **tandy** - Contains utilities, documents, and the like that were written by Tandy Corp.
 * **tjbhris** - Contains documentation, examples, and code that I've put together in my exploration of the platform.  Keep your expectations low.
 
 ## Basic hardware specs
