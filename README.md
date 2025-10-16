@@ -43,7 +43,7 @@ VIS runs a highly customized version of MS-DOS and Windows 3.1 collectively bran
 From a DOS standpoint, many common INT 21H calls are modified, redirected, or unimplemnted.  There is no command interpreter.  A file named COMMAND exists in ROM, but references VIS BIOS extensions rather than being a command interpreter.  Additionally, there is no writable file system in VIS.  As a result, many common MS-DOS calls for file handling are absent or behave differently than expected.  There are two available drive letters in VIS:
 
 * **A:** - The CD-ROM drive.
-* **B:** - A redirector for executable code stored on the Save-It cartridge.  This was used during development of the VIS hardware.  The B: drive redirector presented one file (**CARD.EXE**) to MS-DOS if an executable Save-It cartridge was inserted.  The ability to boot from Save-It cartridges was removed from tbe BIOS in retail units.
+* **B:** - A redirector for executable code stored on the Save-It cartridge.  This was used during development of the VIS hardware.  The B: drive redirector presented one file (**CARD.EXE**) to MS-DOS if an executable Save-It cartridge was inserted.  The ability to boot an un-blessed operating system from Save-It cartridges was removed from tbe BIOS in retail units, though the ability to boot MAKETATM-blessed MS-DOS applications is supported.
 
 Like DOS, Modular Windows is a highly-customized version of Windows 3.1 for set-top use.  The Kernel, GDI, and USER portions have significant changes.  Many common calls and functions available in Windows 3.1 are modified or removed.  For example:
 
