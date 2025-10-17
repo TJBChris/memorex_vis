@@ -1,0 +1,244 @@
+IMAGES.DOC
+
+
+A series of images that demonstrate interlace flicker and other TV-specific
+problems are available on this disc.  These can be displayed in a
+pre-arranged sequence by inserting the disc into a VIS system and
+selecting the "Image Processing Stills"  button.  They can also be displayed
+with the command   showdib.exe -f \pstills\lists
+
+A total of five different images are presented, and each of these is shown
+in its original form (as scanned), and then as processed by three different
+methods.  All of the images were originally captured as 640x400 images.
+
+Image 1		The first image is the unprocessed image, which exhibits
+		varying amounts of flicker and other NTSC artifacts.
+		This is displayed in 640x400x256 mode.
+
+Image 2		The first image was converted to a 24-bit TGA (Targa) file
+		using Alchemy and PicLab was used to reduce the vertical
+		resolution.  The image was rescaled to 640x200 and then back
+		to 640x400.  The resulting 24-bit TGA was then converted to
+		an 8-bit BMP using Alchemy. 
+
+		This simple process eliminates nearly all of the flicker
+		and leaves the horizontal resolution untouched.  However
+		the horizontal luminance resolution is limited to about
+		330 pixels by NTSC television, so maintaining the extra
+		horizontal resolution doesn't buy you much.  It does take
+		10 times longer to draw a 640x400 screen than it takes to
+		draw a 320x200 screen.  This is due to the additional
+		pixels and the extra CPU wait states that exist at higher
+		video resolutions.
+
+Image 3		The first image was converted to a 24-bit TGA (Targa) file
+		using Alchemy and CONVER24 (from the Modular Windows SDK)
+		was used to filter out interlace flicker and other NTSC
+		artifacts.  The suggested filter from the SDK documentation
+		was used and is included on this disc.  The resulting 24-bit
+		TGA was then converted to an 8-bit BMP using Alchemy.
+
+		Depending on the picture, CONVER24 generally didn't produce
+		as good a result as reducing the vertical resolution.
+		Undoubtedly this could be improved by manipulating the
+		filter parameters, but that isn't practical if a large
+		number of images need converting and all need slight
+		adjustments.  By default CONVER24 also seems to give the
+		image a slightly red look and slightly softens the image
+		horizontally and vertically.
+
+Image 4		The first image was converted to a 24-bit TGA (Targa) file
+		using Alchemy and PicLab was used to reduce the vertical
+		resolution.  The image was rescaled to 320x200.  The
+		resulting 24-bit TGA was then converted to an 8-bit BMP
+		using Alchemy. 
+
+
+Here is a discussion by image.  The name of the file being displayed
+appears on the screen.  See the documentation on SHOWDIB for instructions
+on how to operate the image display program.
+
+AMPITHA.BMP	The original image shows significant flicker along the
+		seating area and floor.  Brightly lit (including sunlight)
+		images with lots of contrast exhibit more flicker.  If the
+		original image had been taken on an overcast day, there would
+		probably not be any flicker to deal with.  Outdoor images
+		taken on an overcast day (less contrast) will have less flicker.
+
+AMPITHB.BMP	The same image except the vertical resolution has been
+		reduced to 200 lines, then expanded back to 400 lines.
+		In the process, adjacent colors and brightness were averaged,
+		yielding a less sharp image in the vertical axis, but this
+		reduces the sudden contrast changes in the vertical axis.
+		The even and odd lines of a given pair do not display the
+		same information, although this would be the case if the
+		vertical resolution was left at 200 lines.  When expanded
+		back to 400 lines, additional averaging was done to compute
+		the additional lines, which reduced the large contrast
+		changes further.
+
+		In the case of this image, minimal flicker remains
+		and the image probably needs no further processing.
+		In a 400 line video mode, it is almost impossible to eliminate
+		all flicker.
+
+AMPITHC.BMP	The same image as AMPITHA.BMP (original), only this image
+		was processed using CONVER24.  Although the flicker was
+		greatly reduced, slightly more flicker remains than in the
+		image processed by PicLab.  The image also is less sharp in
+		the vertical and horizontal axis. By manipulating the
+		parameters for CONVER24 further, all flicker could probably
+		be eliminated, but it appears PicLab did a better job on
+		this image.
+
+AMPITHD.BMP	Here the image was reduced to 320x200 using PicLab.  This
+		image shows no flicker or chroma-crawl at all (this is
+		due to Line Pairing, which is discussed more in MODES.DOC),
+		and if the application could utilize a 320x200 video mode,
+		may be preferable.
+
+		Some areas of the image show incorrect colors, notably Green.
+		This is caused by these areas of the image exceeding the
+		luminance bandwidth of the NTSC composite signal (the
+		problem can be seen on RF or composite output, but not on
+		S-Video).  When the number of changes in brightness exceeds
+		the luminance bandwidth, the signal is misinterpreted as
+		color information by the receiver and displayed as different
+		colors.  Even 320 pixel modes can have this problem.  Due
+		to Line Pairing, the color remains constant. 
+		
+		Exceeding the horizontal luminance bandwidth is a problem
+		that also exists in 640 pixel modes.  Here the color would
+		alternate between green and magenta, or red and cyan
+		30 times a second.  This same effect is visible in 320
+		pixel modes if Line Pairing was turned off.
+		
+		This problem can often be seen in black and white TV shows
+		where red and cyan colors can be seen flashing on a plaid
+		suit or other image that has a high number of luminance
+		changes in the horizontal axis.  
+
+		CONVER24 can be used to reduce or eliminate this problem.
+
+
+TENMNTA.BMP	An original image (scanned) in 640x400.  Once again, the
+		brightly lit edges of the roofs and windows that are adjacent
+		to darker areas show flicker.
+
+TENMNTB.BMP	By reducing the vertical resolution to 200 lines and back
+		to 400 lines, nearly all of the flicker has been eliminated
+		with very little loss of image quality.
+
+TENMNTC.BMP	CONVER24 was used on this image and it also did a good job
+		of eliminating the flicker, although the picture color
+		did shift toward red a bit, almost a Kodachrome color
+		balance.  The image is a bit softer in the horizontal
+		axis, but not enough to hurt the image quality.
+
+TENMNTD.BMP	By reducing the image to 320x200, the image suffers from
+		the reduced resolution, but shows no flicker and no
+		chroma-crawl.   This image also attempts to exceed the
+		horizontal luminance bandwidth, and may need to be
+		processed with CONVER24 as well.
+
+
+AERIALA.BMP	This original image shows flicker in the rooftops in the
+		upper right of the image, and along the stone and ironwork
+		along the lower and left part of the image.  If photographed
+		on a cloudy day, this flicker would not be that apparent.
+
+AERIALB.BMP	By reducing the vertical resolution to 200 lines and
+		back to 400 lines, the flicker is eliminated.
+
+AERIALC.BMP	CONVER24 was used on the image and reduced the flicker
+		and looks about the same as the image processed by PicLab.
+
+AERIALD.BMP	This image was reduced to 320x200, and shows no flicker or
+		chroma-crawl, and the reduced resolution is acceptable.
+		Keep in mind that for a television, the recommended
+		viewing distance is 4 to 8 times the height of the image,
+		so the coarseness of the 320x200 image isn't that obvious
+		at a normal viewing distance.
+
+SHIPA.BMP	This line drawing has massive flicker problems, and depending
+		on the quality of your receiver, may also be displaying the
+		pincushion effect  (the left or right edge of the image is
+		not straight).  This is because the screen has so much
+		bright white on it, and the receiver has a power supply that
+		can't deal with the demand that this bright image places on
+		it.
+		
+		The solution for the pincushion is to reduce the overall
+		brightness of the image, particularly near the edge, OR
+		turn on the border area so that the predominate background
+		color extends off the edge of the tube, which hides the
+		pincushion effect from view.  (None of the sample images
+		attempt to correct the pincushion.)
+
+SHIPB.BMP	By reducing the vertical resolution to 200 lines and then
+		back to 400 lines, a lot of the flicker is eliminated,
+		but some is still present in the upper right portion of the
+		sails.
+
+SHIPC.BMP	By using CONVER24, the flicker in the lower part of the
+		ship is reduced, but the flicker remains in the lower
+		portion of the ship and water.
+
+		Some images like this one would probably benefit from
+		being processed by PicLab and CONVER24, which should 
+		eliminate all of the flicker.  Very few images should
+		require to be processed by both programs.
+
+SHIPD.BMP	In the 320x200 version, the flicker is gone, but the
+		Red and Blue (or Purple and Green) colors are much more
+		obvious.  If viewed on the S-Video connector or on a VGA
+		monitor, these colors would not be present.  Again, this is
+		caused by an excessive number of luminance changes in a short
+		span or time (time equals horizontal distance) in horizontal
+		axis.  Note that these colors appear where several lines
+		in the image cross the same horizontal scan line on the CRT.
+		(Hold the edge of a piece of paper up to the screen 
+		horizontally to see this effect.
+
+		Using the filters in CONVER24, this problem can probably 
+		be reduced or eliminated.
+
+
+MONKEYA.BMP	Another black and white drawing that has major flicker
+		problems.
+
+MONKEYB.BMP	By reducing the vertical resolution to 200 lines and
+		back to 400 lines, the flicker is greatly reduced and
+		remains along the left and right side of the face.
+
+MONKEYC.BMP	CONVER24 was used on the image and it reduced the flicker
+		in almost exactly the areas that PicLab did not help in,
+		but flicker remains in the areas that PicLab took care
+		of in the previous image.  This is another example where
+		using both PicLab and CONVER24 probably would provide
+		a usable image.
+
+MONKEYD.BMP	As with the line-drawing of the ship, reducing the image
+		to 320x200 eliminates all flicker, but due to the
+		horizontal bandwidth being exceeded, more colors are
+		shown that are not actually in the image.
+
+		CONVER24 or similar filtering utilities can be used to
+		reduce the horizontal luminance bandwidth, which will make
+		the image look "softer".
+
+The effect that interlaced video has on exceeding the luminance bandwidth
+can be demonstrated.  At the start-up menu, press the "1" key.  This will
+give you a command line.  Type the following commands:
+	\software\linepair.exe
+	showdib.exe -f \pstills\lists
+Now when 320x200 images are displayed (the "D" images), Line Pairing will
+be disabled and the interlacing effect will change the incorrect colors
+to an alternating (flickering) color, usually alternating between Red and
+Cyan.
+
+
+301202 fdiv
+
+---
+

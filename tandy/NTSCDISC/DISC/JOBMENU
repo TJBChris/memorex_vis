@@ -1,0 +1,20 @@
+#		12345678901234567890
+REGISTER	Insert_your_code_here
+
+
+PROGRAM 1	"A:modes.exe"
+PROGRAM 2	"A:showdib.exe -f \\pstills\\lists"
+PROGRAM 3	"minwin A:\\tutorial"
+PROGRAM 4	"minwin A:\\tstills"
+PROGRAM 5	"A:cardtal3.exe"
+
+PAGE 1
+BUTTON NA BLUE.BMP RUN 3
+BUTTON SA YELLOW.BMP RUN 4
+BUTTON EA GREEN.BMP RUN 2
+BUTTON WA RED.BMP RUN 1
+BUTTON 3 0 OPENCLOSE
+BUTTON 1 0 RUN 5
+
+PALETTE RED.BMP
+

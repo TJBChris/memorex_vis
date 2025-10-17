@@ -1,0 +1,11 @@
+
+GCD.EXE		Changes the current directory to the one specified.
+		For VIS systems, it is the equivalent of the MS-DOS
+		CD (change directory) command.
+
+LINEPAIR.EXE	Disables Line Pairing in 200 line video modes and
+		causes the VIS system to produce a NTSC-compliant
+		signal in those modes.  This utility or equivalent
+		code must be used if the output of a VIS is to be
+		recorded on videotape.
+

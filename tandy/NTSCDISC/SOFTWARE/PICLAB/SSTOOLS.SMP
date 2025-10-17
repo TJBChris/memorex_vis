@@ -1,0 +1,18 @@
+; This file is a sample of how to set up your SSTOOLS.INI file.
+; The values shown here are for my personal computer.  Yours will
+; probably be very different.
+;
+
+[fractint]
+
+sound=off
+warn=yes
+printer=ps/150
+
+[piclab]
+
+tempdir=g:/
+picdir=f:/tga
+printer=paintjet
+helpfile=c:/usr/local/piclab/pl.hlp
+display=svga1

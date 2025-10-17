@@ -1,0 +1,1075 @@
+PICLAB.DOC
+December 3, 1991
+
+Piclab 1.91 is a public domain image processing program by Lee
+Daniel Crocker and the Stone Soup Group.  It should be distributed
+with the following files:
+
+PL.EXE          The program itself.
+PL286.EXE       Faster, smaller version for 286 (and up) machines.
+PICLAB.DOC      This file.
+PL.HLP          Text file for the HELP command.
+PICLAB.PIF      Windows 3.0 386 enhanced mode PIF.
+PICLAB.ICO      Windows 3.0 icon.
+GAMMA1.MAP  \
+GAMMA2.MAP   X  Color maps for viewing grayscale and pseudo-color.
+PSEUDO.MAP  /
+SSTOOLS.SMP     Sample SSTOOLS.INI file.
+
+If you are missing one or more of these files, contact the author
+at one of the addresses listed at the end of this document.
+
+
+
+Overview
+========
+
+Piclab operates on "images", so I will begin by explaining exactly
+what an image is and how Piclab classifies them.
+
+For our purposes, an image is a data set that describes
+the reflectance of a 2-dimensional surface such as a photograph.  In
+particular, an image is a 2-dimensional array of "pixels" (a short
+form of "picture elements"), each of which contains data for the
+small rectangular area of the image it represents.
+
+There are many systems in which image data represents "objects"
+rather than pixels.  PostScript is probably the most notable example. 
+The commands sent to a PostScript device tell it to draw lines or
+boxes or characters and let the device decide how it will perform the
+commands it gets.  Piclab does not deal with object-based images or
+devices.
+
+Image data comes in several flavors, and while all are related in
+many ways, there are distinctions important to keep in mind.  I will
+divide image data into four classes: bitmapped, grayscale,
+golor-mapped, and true-color.  In all of these formats an image is
+represented as a rectangular array of pixels, each of which may
+contain some value.
+
+Bitmapped images are collections of on/off dots.  That is, each pixel
+can be either "on" or "off", with no states in between.  This type of
+image can be displayed on just about any type of computer and is
+especially suited to printer output.  The disadvantages are the
+inability to represent color, and the lack of detail.  With large
+bitmapped images, one can get a surprising amount of detail by
+simulating shades of gray by dot patterns.  This process, called
+halftoning, is used by newspapers to print photographs.
+
+At this time, Piclab does not deal directly with bitmapped images,
+although it can treat them as grayscale and can output images to
+bitmapped devices.
+
+Grayscale images represent images by storing the intensity of light
+for each pixel on a scale of more than just on/off.  Typically, a
+grayscale image will allow 64 to 256 shades of gray at each pixel. 
+Very high quality renderings of black and white photographs can be
+stored in this format.
+
+As an aside, the term "black and white" is often used to describe
+both bitmapped images and grayscale images.  For this reason, I will
+not use the term in this document.  Another common term for grayscale
+is "monochrome", which is often used to describe monitors that can
+display only shades of one color (often green or amber).
+
+Color-mapped images are the ones most common on personal computers.
+Each pixel in an image is represented by a number (called an index)
+that is used to look up the pixel's actual color in a table (called
+the palette, much like an artist's palette).  These images are
+popular because they can be very colorful, yet take up less memory
+than full-color images (described next).  The size of the color
+palette varies among formats, but is typically 16 to 256.
+
+True-color images are the highest quality representation, and the
+largest files as well.  Each pixel contains the complete color
+information for that pixel, usually expressed as the intensity of the
+red, green, and blue color components of the light at that location.
+
+Piclab deals directly with grayscale, color-mapped and true-color
+images, regardless of the display capabilities of the hardware on
+which it is running.  In fact, Piclab can be used to enhance and
+print images on machines with no display at all.
+
+I must stress that there is no connection between the images
+Piclab deals with and the type of display on your computer.  Piclab
+has a SHOW command that displays the image it is working with, but if
+the image is more detailed than your display can handle, Piclab will
+do its best to approximate the image on your display.  Regardless of
+what the display looks like, the image itself is always stored and
+operated upon in full detail.
+
+So what's the point?  You might think that having image data more
+accurate than your computer can display is wasteful, but it is not. 
+One reason is that images get passed around to users of different
+machines, and the more accurate the image data, the better each
+machine will be able to display it.  You can also do things like
+print color images to a color printer even though you have no color
+display on your computer.  Lastly, hardware to display images as
+accurately as Piclab stores them does exist, and is becoming more
+affordable every day.  If you keep your images stored in their full
+accuracy, you will be better able to take advantage of any new
+hardware you may get.
+
+
+
+General Operation
+=================
+
+After starting Piclab by typing "PL" at the system command line, the
+user may enter any of a number of commands, each of which is
+performed immediately.
+
+If you give arguments to the PL command, the first is taken as the
+name of a file containing Piclab commands, and the rest are treated
+as arguments to that program, accessed as %1, %2, etc., much like DOS
+batch file arguments.  This feature can be used to create programs
+for specific tasks.
+
+Commands generally operate on two internal picture buffers called OLD
+and NEW.  Most commands start by deleting OLD and renaming NEW to
+OLD.  They then perform some transformation on OLD storing the result
+in NEW.  The command UNDO swaps NEW and OLD--effectively reversing
+the last operation.
+
+OLD and NEW are stored on disk.  This decision was made primarily
+because my taste in pictures is better than my budget for RAM.  If
+you are dealing with simpler pictures, or if you have RAM to burn,
+you can direct Piclab to store OLD and NEW on a RAMdisk.  In MSDOS
+and similar operating systems, this is done by typing "SET TMP=D:" at
+the system command line before running Piclab, where D: is the drive
+or directory specification of the RAMdisk.
+
+Piclab can read and write images in different file formats.  The LOAD
+command is used to read an image in one of these formats into the
+edit buffers.  The SAVE is used to write the contents of the edit
+buffers into one of these formats.  Every session with Piclab will
+generally begin with a LOAD, and end with a SAVE (or perhaps a PRINT)
+with some processing in between.  A file may be loaded from one file
+format and saved in a different one, thereby converting among formats.
+
+Command parsing in Piclab is roughly like that of the system command
+line.  The line is broken into words that must be separated by
+spaces; the first word specifies the actual command and the remaining
+words are passed to the command handler as arguments.  The individual
+command-handling routines are responsible for interpreting their
+arguments.  Generally, a word may be shortened as long as it does not
+conflict with any other word in the same context. For example, the
+LIST COMMANDS command may be abbreviated LIS COM.
+
+Any words in the command line that begin with the '%' character are
+replaced as follows: if the remainder of the word is a number, the
+word is replaced with the argument to the PL command in that position
+(starting with 0).  Otherwise, the word is replaced with the value of
+the DOS environment variable named by the word.  For example, here is
+a short Piclab program (named V2E) to convert a VGA 256-color image
+into an EGA 16-color image:
+
+GLOAD %1
+UNMAP
+RESCALE 640 350
+EGAPAL
+MAP
+GSAVE %2
+
+With this program in the current directory, typing "PL V2E IMG1 IMG2"
+will load IMG1.GIF, convert it to 16-color ega, and save that to
+IMG2.GIF.
+
+Piclab has many settings that can be changed to accommodate the
+user's needs or environment.  From within Piclab, these are set with
+the SET command.  Because many of these will need to be set
+identically each time Piclab is run, a mechanism is proved for
+putting initial settings into a startup file.
+
+This file, called SSTOOLS.INI, must be in a directory pointed to by
+the environment variables INIT or PATH.  It is a plain text file that
+contains initial settings and preferences for many of the Stone Soup
+tools.  The included file SSTOOLS.SMP is a good sample.  Edit it to
+suit your system, rename it SSTOOLS.INI, and place it where it can be
+found with the INIT or PATH environment variables.
+
+Note that sections for each tool are marked by a line containing only
+the tool's name in square brackets.  The lines in the Piclab section
+can contain any variable normally set by the SET command, but note
+the different syntax: there is no SET, and the variable name and
+value are separated by an = sign rather than a space.
+
+
+
+Commands
+========
+
+MAKEPAL
+
+Syntax: MAKEPAL
+
+Makes a palette appropriate for the NEW buffer.  Operates on only
+true-color images.  The variable PALETTE determines the number of
+colors in the new map, and the MAKEPAL command picks that many colors
+to best fit those in the image.
+
+The MAP command must be used to map the image onto the palette.
+
+
+EGAPAL
+
+Syntax: EGAPAL
+
+Makes a 16-of-64-color palette appropriate for the NEW buffer.
+Operates on only true-color images.  This is designed primarily for
+reducing full-color images to a form better suited for display on
+an IBM EGA or similar device.
+
+The MAP command must be used to map the image onto the palette.
+
+
+MAP
+
+Syntax: MAP
+
+Maps NEW buffer onto the current palette.  Operates only on true-color
+images, and produces a color-mapped image.  The variable DITHER
+determines whether each pixel is simply mapped onto the nearest color
+in the map, or whether dithering is used to achieve a more accurate
+mapping.  DITHER defaults to ON, and is recommended for most uses.
+
+The MAKEPAL command should be used to create the best possible palette
+for the image before mapping, but any palette may be used for special
+purposes such as mapping several images to the same palette.
+
+
+PLOAD
+
+Syntax: PLOAD file [offset [count]]
+
+Loads a MAP file into the current palette.  First argument is the name
+of the MAP file which is assumed to be in the MAPDIR directory.  If a
+second argument is given, the palette is loaded starting at that index.
+If a third argument is given, only that many colors are loaded.
+
+MAP files are plain text files that contain the RGB values for each
+palette index on one line.
+
+
+PSAVE
+
+Syntax: PSAVE file [offset [count]]
+
+Saves a MAP file from the current palette.  First argument is the name
+of the MAP file which is assumed to be in the MAPDIR directory.  If a
+second argument is given, the palette is loaded starting at that index.
+If a third argument is given, only that many colors are loaded.
+
+This can be used to save a palette created with MAKEPAL so that it need
+not be calculated again, or so that it can be used with other images.
+
+MAP files are plain text files that contain the RGB values for each
+palette index on one line.
+
+
+GRAYPAL
+
+Syntax: GRAYPAL file [offset [count]]
+
+Makes the specified MAP file the default colors used when displaying
+monochrome images or full-color images on a VGA.  The default colors
+are equivalent to GAMMA1.MAP, but GAMMA2.MAP and PSEUDO.MAP can be
+useful in some situations.
+
+MAP files are plain text files that contain the RGB values for each
+palette index on one line.
+
+
+UNMAP
+
+Syntax: UNMAP
+
+Produces a true-color image from a color-mapped one.  This must be done
+before applying true-color transformations such as rescaling.  After
+transformations have been performed in true-color, the image may be
+reduced to a color-mapped one again with the MAKEPAL and MAP commands.
+
+
+HELP
+
+Syntax: HELP [subject]
+
+Looks like you have figured this one out already.
+
+
+CALL
+
+Syntax: CALL program [args]...
+
+Calls the external program named by its first argument passing along
+any subsequent arguments to that program.  Many programs do not
+release all of the memory given to them when they terminate, so
+Piclab will reserve a large portion of memory for itself before
+calling a program.  If you do not have much more memory than Piclab
+reserves, this may result in the program not being able to run in the
+memory left.
+
+If this is a problem, you can use the DOS or SHELL commands to exit
+to DOS with all of the free memory available.
+
+
+CANCEL
+
+Syntax: CANCEL
+
+Cancels the most recent operation.  If there are point
+transformations pending that have not yet been saved with the
+TRANSFORM command, these are cancelled and no changes are made to the
+edit buffers.  Otherwise, the NEW and OLD buffers are exchanged.
+
+There are some operations (like SAVE) that do not alter the edit
+buffers.  If one of these operations was the last one performed, UNDO
+will undo the operation before that.  No arguments.
+
+
+UNDO
+
+Syntax: UNDO
+
+Cancels the most recent operation.  If there are point
+transformations pending that have not yet been saved with the
+TRANSFORM command, these are cancelled and no changes are made to the
+edit buffers.  Otherwise, the NEW and OLD buffers are exchanged.
+
+There are some operations (like SAVE) that do not alter the edit
+buffers.  If one of these operations was the last one performed, UNDO
+will undo the operation before that.  No arguments.
+
+
+SHELL
+
+Syntax: SHELL [command]
+
+Calls up the DOS command line.  All available memory is released to
+DOS when this command is given, and is reclaimed when DOS is exited.
+For this reason, some programs that cannot be CALLed may be run from
+with DOS.
+
+Any arguments to this command will be passed to the system as a
+command line, and will cause it to return immediately after the
+command is done.  One particularly useful action of this program is
+"SHELL COPY /B PDAT PRN", which copies the print file to the printer.
+"SHELL DIR" can be used to view file directories when you want to see
+all files, not just pictures.
+
+
+DOS
+
+Syntax: DOS [command]
+
+Calls up the DOS command line.  All available memory is released to
+DOS when this command is given, and is reclaimed when DOS is exited.
+For this reason, some programs that cannot be CALLed may be run from
+with DOS.
+
+Any arguments to this command will be passed to the system as a
+command line, and will cause it to return immediately after the
+command is done.  One particularly useful action of this program is
+"DOS COPY /B PDAT PRN", which copies the print file to the printer.
+"DOS DIR" can be used to view file directories when you want to see
+all files, not just pictures.
+
+
+QUIT
+
+Syntax: QUIT [flag]
+
+Exits Piclab.  If there is a point transformation pending, it must be
+cancelled or saved before exiting.  If the exit command is given any
+arguments, it exits immediately regardless of pending transformations.
+
+Inside a program, QUIT merely sets a flag so that Piclab will exit after
+the program is complete.
+
+
+EXIT
+
+Syntax: EXIT [flag]
+
+Exits Piclab.  If there is a point transformation pending, it must be
+cancelled or saved before exiting.  If the exit command is given any
+arguments, it exits immediately regardless of pending transformations.
+
+Inside a program, EXIT merely sets a flag so that Piclab will exit after
+the program is complete.
+
+
+LIST
+
+Syntax: LIST [item]
+
+If given without an argument, shows what things may can be listed.
+If one of these things (e.g. FORMATS, COMMANDS, BUFFERS) is given as
+an argument, the appropriate items are listed.  Especially useful are
+LIST COMMANDS if you forget the name of a command you are looking for
+and LIST BUFFERS to check the size and format of the image in the OLD
+and NEW edit buffers.
+
+
+PAUSE
+
+Syntax: PAUSE [time]
+
+With no arguments, Piclab waits for a key to be pressed before
+continuing.  If one argument is given, Piclab waits for that number
+of seconds (but will break early if a key is pressed).  This is for
+use within programs.
+
+
+PRINT
+
+Syntax: PRINT [x-offset [y-offset]]
+
+Prints the image in the NEW buffer into the file specified by the
+PRINTFILE variable.  The current setting of the PRINTER variable
+determines what codes are sent to the file.
+
+Some versions of DOS do not correctly write to devices such as "prn"
+when opened as ordinary files.  For that reason, Piclab treats the
+PRINTFILE "" as a special case, and sends data directly to the
+printer rather than through DOS.
+
+If arguments are given, the first two are used as the X and Y offsets
+of the first dot to print on the first page of output.
+
+
+RUN
+
+Syntax: RUN program [args...]
+
+Takes one argument--the name of a text file containing Piclab
+commands.  These are interpreted as if they had been typed from the
+command line, but they are not echoed, and messages are turned off
+while a program runs.  Subsequent arguments are passed along to the
+program as %1, etc.
+
+A program can also be run by giving its name as an argument to the PL
+command when starting Piclab.
+
+
+SHOW
+
+Syntax: SHOW [x-offset [y-offset]]
+
+Used to display as much of the image in the NEW buffer as will fit on
+the computer's display screen.  If arguments are given, the first is
+used as a horizontal offset into the image buffer and the second as a
+vertical offset.  This can be used to look at different parts of an
+image too big for the screen.  Certain video modes allow scrolling
+with the arrow keys, but not all.  If no arguments are given, the
+current values of the XORIGIN and YORIGIN variables are used.
+
+If any point transformations are pending, the image you see on screen
+reflects the image as it would be AFTER the pending transformation.
+This can be used to look at the effect of a transformation before
+saving or cancelling it.
+
+Because Piclab often stores data more accurately than the display can
+render it, what you see on the screen is only an approximation of the
+actual image.  In particular, because Piclab does not yet support any
+true-color display hardware, true-color images will be shown in grayscale
+on displays capable of it, or in 8-color dither on others.
+
+
+SET
+
+Syntax: SET [variable [value]]
+
+Without any arguments, lists all Piclab variables and their current
+values.  Variables can be numbers, character strings, or TRUE/
+FALSE.  Variables set system defaults and control the specifics of
+how many commands perform.
+
+If the set command is given one argument, the variable named is
+cleared.  That is, set to 0 if it is numeric, to "" if it is a
+string, and to FALSE if it is TRUE/FALSE.
+
+If SET is given with two arguments, the variable named by the first
+is set to the value specified by the second.  If a numeric variable
+is given a string value, it is set to 0.  String values should not be
+put in quotes.  TRUE/FALSE values may be set by the keywords
+TRUE/FALSE, YES/NO, ON/OFF, or by the numeric values 1/0.
+
+Within the SSTOOLS.INI file, the syntax is <variable>=<value>.
+
+Help on individual variables is available by typing HELP <variable>.
+
+
+HISTOGRAM
+
+Syntax: HISTOGRAM [RED | GREEN | BLUE]...
+
+If no arguments are given, plots histograms for all planes; if one or
+more arguments are given, a histogram is plotted for each plane
+specified as an argument.  The histograms plotted reflect the image
+as it would be after any pending transformations, so you can look at
+the results of many processes before saving or cancelling them.
+
+Each vertical bar of the histogram represents the total number of
+pixels in the image with values in the range beginning with the value
+listed below the histogram in hexadecimal.  Each bar covers a range
+of four values and there are 64 bars.  The height of each bar is in
+logarithmic proportion to the frequency of occurrence of values in
+the range it represents.  The bars are automatically scaled so that
+the tallest one is made 20 characters high.
+
+
+NEGATE
+
+Syntax: NEGATE [RED | GREEN | BLUE]...
+
+Arguments are handled as in HISTOGRAM.  Inverts each value in the
+lookup table for the planes specified.  This can be used after
+digitizing a negative or for special effects.
+
+
+DARKEN
+
+Syntax: DARKEN [[RED | GREEN | BLUE] value]...
+
+Subtracts a constant value to each point in the planes specified.  If
+only one argument is given, all planes are brightened by that amount.
+Otherwise, arguments are interpreted in order, and any arguments that
+specify planes determine which plane the next numerical argument will
+affect.  For example, DARKEN RED 10 BLUE 15 would subtract 10 from
+the values in the red plane and 15 from those in the blue.  Any
+values that would be taken out of the 0..255 range by the transform
+are clamped.
+
+Because this darkening is a linear operation, the image to be
+brightened or darkened should be encoded with a gamma of 1.0.  That
+is, there should be a linear relationship between values in the image
+and intensities on the display.  If this is not the case, gamma
+correction may be applied with the GAMMA command before adjusting
+brightness.
+
+
+BRIGHTEN
+
+Syntax: BRIGHTEN [[RED | GREEN | BLUE] value]...
+
+Adds a constant value to each point in the planes specified.  If only
+one argument is given, all planes are brightened by that amount.
+Otherwise, arguments are interpreted in order, and any arguments that
+specify planes determine which plane the next numerical argument will
+affect.  For example, BRIGHTEN RED 10 BLUE 15 would add 10 to the
+values in the red plane and 15 to those in the blue.  Any values that
+would be taken out of the 0..255 range by the transform are clamped.
+
+Because this brightening is a linear operation, the image to be
+brightened or darkened should be encoded with a gamma of 1.0.  That
+is, there should be a linear relationship between values in the image
+and intensities on the display.  If this is not the case, gamma
+correction may be applied with the GAMMA command before adjusting
+brightness.
+
+
+CONTRAST
+
+Syntax: CONTRAST [[RED | GREEN | BLUE] value]...
+
+This stretches or squeezes the contrast of an image.  Arguments are
+interpreted like those in BRIGHTEN.  If a given value is positive,
+the image contrast is stretched so that values that were equal to the
+given value become 0, and those that were equal to (255-value) become
+255.  If the given value is negative, the inverse operation is
+performed.  Because contrast is always stretched equally around the
+midpoint of the range, it is a good idea to brighten or darken an
+image as necessary to center its histogram before performing a
+contrast stretch.
+
+Also, the contrast stretching formula operates on color values
+assuming a linear relationship between these values and the
+intensities they represent (as do the BRIGHTEN and DARKEN commands). 
+Therefore, if an image has been scanned with a device with a gamma
+value not equal to 1.0, the image should be gamma corrected before
+contrast stretching.
+
+
+GAMMA
+
+Syntax: GAMMA [[RED | GREEN | BLUE] value]...
+
+The color values of the specified planes are adjusted so that values
+encoded for display on a monitor with a gamma value equal to the
+argument become linear.
+
+For example, images encoded for display on PCs usually expect a
+monitor with a gamma near 2.0.  The GAMMA 2.0 command will convert
+these values to a linear scale.
+
+Images encoded on Macintoshes and similar equipment have linear
+values already.  Such images can be adjusted for display on PCs with
+the inverse transformation, i.e. GAMMA 0.5.
+
+See Piclab.DOC for more background on gamma correction.
+
+
+COLOR
+
+Syntax: COLOR [mapfile]
+
+Converts a grayscale image into a color-mapped image.  If the first
+argument is the name of a MAP file, the image is pseudo-colored with
+that map, otherwise the color map will contain the original grays.
+
+
+GRAY
+
+Syntax: GRAY
+
+Converts true-color or color-mapped image to grayscale.  The formula
+used for conversion to grayscale is the same as used by black and
+white televisions and is designed to mimic the eye's response: gray =
+(.299 * red) + (.587 * green) + (.114 * blue).
+
+
+TRANSFORM
+
+Syntax: TRANSFORM
+
+Saves the result of a series of point-process transformations to the
+edit buffer.  This must be done before any other transformation may
+be performed on the image.  If you wish to cancel the pending
+transformations without saving them, use UNDO or CANCEL.
+
+
+MEDIAN
+
+Syntax: MEDIAN [WEIGHTED]
+
+Reduces spot noise in an image.  Each point is replaced by the median
+of the points in its 3 x 3 area.  That is, the nine points in this
+area are sorted and the fifth one is taken.  If the one argument to
+this routine is WEIGHTED, then the center point is added twice more
+to the list and the sixth of the 11 points is taken.
+
+The median filter results in some smoothing, but not as much as with
+the SMOOTH command.  This effect is a little less drastic with the
+weighted median filter.  Repeated application of this operation will
+result in an oil-paint texture appearing on the image.
+
+This filter will not help reduce periodic or other noise--only small
+spot noise such as from dust on a lens.
+
+
+SHARPEN
+
+Syntax: SHARPEN [value]
+
+Applies what is called (somewhat inaccurately) a LaPlace transform to
+the image.  The effect is that edges in the image are sharpened as if
+the image had been re-focused.  Unfortunately, it also increases the
+amount of noise in the image, making it appear more grainy.
+
+The command can be given a single numerical argument, which specifies
+the severity of the transform.  It is basically a tradeoff between
+sharpness and noise, and defaults to 1.0.  This value provides a
+noticeable increase in both sharpness and noise, and is about the
+best value for sharpening when the purpose is to bring out
+information.  When applying to a real image, a less severe value of
+.2 to .5 is often better.  Values greater than 1.0 should be used
+only when trying to locate specific objects in an image.  They
+produce too much noise for accurate reproduction.
+
+This function works by amplifying the differences between each point
+and its neighbors.  This has the effect of amplifying high spatial
+frequency details such as edges and noise.
+
+
+SMOOTH
+
+Syntax: SMOOTH [value]
+
+Replaces each point with the average of the values of the nine points
+in its neighborhood.  This has the effect of smoothing the image and
+reducing high frequency effects like aliasing and noise, as well as
+high frequency details.  If an argument is given, it is taken as a
+value of the severity of the transform as with the SHARPEN command. A
+value of 1.0 is exactly as described.  Values less than 1.0 change
+the center value less than if a straight average had been done. 
+Values greater than 1.0 are not recommended.  If more smoothing is
+desired, perform SMOOTH more than once rather than with a high value.
+
+
+ADD
+
+Syntax: ADD [WRAP]
+
+Adds the OLD and NEW edit buffers storing the result in the NEW
+buffer.  If the only argument to the command is WRAP, then values
+that are taken out of the 0..255 range by the addition are taken mod
+255; otherwise, values are clamped.
+
+
+SUBTRACT
+
+Syntax: SUBTRACT [WRAP]
+
+Subtracts the NEW edit buffers from the OLD buffer storing the result
+in the NEW buffer.  If the only argument to the command is WRAP, then
+values that are taken out of the 0..255 range by the addition are
+taken mod 255; otherwise, values are clamped.
+
+
+AVERAGE
+
+Syntax: AVERAGE
+
+Averages the OLD and NEW buffers, storing the result in NEW.  This
+can be used to reduce random digitizer noise by averaging the results
+of different samplings.  Can also be used to produce a double exposure
+effect when two different images are averaged.  No arguments.
+
+
+CLIP
+
+Syntax: CLIP [x-size y-size]
+
+If no arguments are given, image is clipped from (XORIGIN,YORIGIN) to
+lower right corner (upper right for bottom-up images).  If two
+arguments are given, the image is clipped from (XORIGIN,YORIGIN) to
+the horizontal and vertical size specified by the arguments.  XORIGIN
+and YORIGIN are set to 0 after this operation.  One argument is an
+error; more than two are ignored.
+
+
+EXPAND
+
+Syntax: EXPAND x-size y-size [(BLACK | WHITE | value) [value]...]
+
+This command increases the size of the image to the width and height
+specified by its first two arguments by adding extra rows and columns
+of pixels.  If a third argument is given, it can be either BLACK or
+WHITE to indicate what color the extra pixels should be.  If three
+numeric arguments are given after the bounds arguments, they are
+taken as the red, green, and blue value of the extra pixels. 
+
+Multiple images can be placed in a montage by using EXPAND and
+OVERLAY.  Parts of an image may be joined with these functions as
+well, but it is not recommended for separately digitized image
+pieces, as no mosaicking is performed.
+
+For color-mapped images, the third argument is treated as a color map
+index rather than a color value.
+
+
+MIRROR
+
+Syntax: MIRROR
+
+Flips the image horizontally.  No Arguments.
+
+
+OVERLAY
+
+Syntax: OVERLAY [x-offset [y-offset [threshhold]]]
+
+Overlays the image in the NEW buffer on top of the OLD buffer.  The
+image in the NEW buffer must not be larger than the image it is to
+overlay.  If two arguments are given, they are used as the horizontal
+and vertical offsets into the base image at which the overlay image
+is to be placed.  Otherwise, XORIGIN and YORIGIN are used.
+
+If a third argument is given, all values in the overlaying image less
+than the give threshhold are treated as transparent.  This feature is
+primarily for grayscale and color-mapped images.  Using it on full
+color images produces bizarre results, because the threshholding is
+applied to each RGB component separately, rather than to the whole
+color value.
+
+
+RESCALE
+
+Syntax: RESCALE value | (x-size y-size)
+
+Resamples the image at a different resolution.  This is useful for
+scaling images up to a larger size for printing, or for scaling them
+down for display.  It is recommended that image data always be saved
+at its original sampling resolution to preserve as much data as
+possible and only scaled when necessary to conform to hardware.
+
+If only one argument is given, horizontal and vertical resolution are
+both increased in the given proportion.  For example, if a 320 x 240
+image is in the NEW buffer when the command RESCALE 1.5 is given, the
+NEW buffer will contain the same image at 480 x 360.
+
+More useful, though, is the case where two arguments are present.  In
+this case, the arguments are treated directly as the new horizontal
+and vertical resolution of the image.  The transformation above could
+be expressed as RESCALE 360 480.  This is most often used to
+compensate for differing aspect ratios.  For example, a 320 x 400
+from an Amiga can be rescaled to 320 x 200 to be viewed on a VGA, or
+to 720 x 540 for printing on the HP PaintJet.
+
+Because RESCALE interpolates color values, it cannot be used on
+color-mapped images.
+
+
+REVERSE
+
+Syntax: REVERSE
+
+Changes the storage order of an image from top-down to bottom-up or
+vice versa.  This is used primarily to save an image loaded from a
+file in one format (like PCX) to a format requiring the opposite
+order (like GIF).
+
+Targa files can be stored either way, and contain information in the
+header specifying which way they are stored.  Thus, any image can be
+saved in Targa format at any time with minimal memory usage.
+
+
+ROTATE
+
+Syntax: ROTATE value
+
+Rotates image in 90-degree increments.  The single argument is
+the number of degrees through which to rotate.  Only 90, 180, and
+270 are currently supported (well, 0 and 360 work too, but they
+aren't very exciting.)
+
+This is very useful for rotating screen-oriented images for printing
+on paper.  Because this operation requires large amounts of memory
+for large images, it is recommended in this case to rotate the image
+before scaling it up to size for printing.
+
+
+DIR
+
+Syntax: DIR [directory]
+
+Lists all files in the PICDIR directory in the current file format.  If
+an argument is given, files in that directory are listed.  No other
+file specifications can be given.  If FILEFORMAT is set to GIF or
+TARGA, statistics on the files will be listed as well.
+
+
+GDIR
+
+Syntax: GDIR [directory]
+
+Lists only GIF files from PICDIR or from the directory given as sole
+argument.  Statistics are listed from each file as well.
+
+
+TDIR
+
+Syntax: TDIR [directory]
+
+Lists only Targa files from PICDIR or from the directory given as
+sole argument.  Statistics are listed from each file as well.
+
+
+LOAD
+
+Syntax: LOAD file [args]...
+
+Loads a file in the current file format into the NEW buffer, moving
+the current contents of the NEW buffer to OLD.  Any arguments are
+passed along to the function that handles loading for the current
+format and are interpreted by that routine.  The first argument is
+always the file to be loaded, but other arguments vary with the format.
+
+LIST FORMATS will give you a list of all the available file formats,
+and HELP is available for each.
+
+
+GLOAD
+
+Syntax: GLOAD file
+
+Loads image in GIF format regardless of the current setting of
+variable FILEFORMAT.  Sole argument is filename.
+
+
+TLOAD
+
+Syntax: TLOAD file
+
+Loads image in Targa format regardless of the current setting of
+variable FILEFORMAT.  Sole argument is filename.
+
+
+RLOAD
+
+Syntax: RLOAD file x-size y-size [COLOR | MONO]
+
+Loads image in RAW format regardless of the current setting of
+variable FILEFORMAT.  The width and height of the image must be
+specified as the second and third arguments to RLOAD.  A fourth
+argument may be either of the words COLOR or MONO to specify the
+number of planes.  COLOR is default.
+
+Color-mapped RAW files must be loaded as MONO, then colored with the
+COLOR command after the palette is loaded with PLOAD.
+
+
+SAVE
+
+Syntax: SAVE file [args]...
+
+Saves the image in the NEW buffer to the file specified by the first
+argument.  Subsequent arguments are passed along to the file save
+routine of the current file format.
+
+LIST FORMATS will give you a list of all the available file formats,
+and HELP is available for each.
+
+
+GSAVE
+
+Syntax: GSAVE file [INTERLACE]
+
+Saves the NEW buffer to the file named by the first argument in GIF
+format regardless of the current setting of variable FILEFORMAT.  If
+the second argument is the word INTERLACE, image is interlaced.
+
+
+TSAVE
+
+Syntax: TSAVE file [bits]
+
+Saves the NEW buffer to the file named by the first argument in Targa
+format regardless of the current setting of variable FILEFORMAT.  If
+the second argument is 16, 24, or 32, it is used as the number of
+bits per pixel stored in the file.
+
+
+RSAVE
+
+Syntax: RSAVE file
+
+Saves image in RAW format regardless of the current setting of
+variable FILEFORMAT.  No arguments.
+
+
+
+Warnings and Errors
+===================
+
+"Command arguments ignored"
+
+    This warning occurs when you give a command more arguments than it
+    needs.  Review the syntax of the command for an explanation.
+
+"Open files were closed"
+
+    This indicates that a command halted for some reason while files
+    were open.  Piclab has closed the files but data may be lost.
+
+"Probable information loss"
+
+    This warning is very common and should be taken lightly.  It
+    indicates that some transformation has been performed that is not
+    reversible.  Most of the time, the initial image will be safely
+    stored in a disk file, or recoverable with UNDO, so this is
+    unimportant.
+
+"Assertion failure; contact author"
+
+    The is printed only in places I think are unreachable.  This
+    message indicates a serious error, and action (such as saving the
+    working file and exiting the program) should be taken immediately.
+
+"Insufficient memory"
+
+    There is not enough memory to perform the command issued with the
+    current environment.  This is most common in frame processes like
+    ROTATE, and with GIF loading with MULTIIMAGE and MULTIMAP set ON. 
+    In the latter case, those variables can be set to OFF before
+    loading.  In the former, there is not much alternative but to clip
+    the image to a smaller size or try to provide more memory.
+
+"Miscellaneous file I/O"
+
+    File open or write failed.  Could be bad or full disk.  Retrying
+    may help.
+
+"Unexpected end of file"
+
+    File read failed.  This may occur when loading a file that is not
+    encoded in the correct format, or when loading a RAW or IP file
+    when the size is specified incorrectly.  CLIP may sometimes be used
+    to recover.
+
+"LZW compression/decompression"
+
+    Usually the result of a bad GIF file.
+
+"Unrecognized file format or bad file"
+
+    The LOAD command encountered something in the file not consistent
+    with the file format being loaded.  Usually this is because you
+    specified the wrong format, but may also occur on a bad or
+    incorrectly encoded file.
+
+"Image buffer empty"
+
+    You attempted a transformation when no image is in the edit
+    buffers.
+
+"Point transform pending; issue TRANSFORM command"
+
+    The command you issued cannot be performed until any pending point
+    transformations are either saved with the TRANSFORM command or
+    cancelled with the UNDO command.
+
+"Illegal parameter values"
+
+    This is a catch-all command syntax error.  Review the syntax of
+    the command you are issuing.
+
+"File not found"
+
+    File open in LOAD command failed.  Check that the file is in the
+    proper directory by issuing a DIR command.  Also check for correct
+    spelling.
+
+
+
+Acknowledgements
+================
+
+Though I wrote 90% of the code, this project was definitely a group
+effort.  The Graphics Support Forum Developer's Group on CompuServe
+was instrumental in helping to inspire, create, optimize and test
+this program.  I cannot acknowledge them all (or even name them all)
+but a few deserve special mention:
+
+John Bridges' Image Tools package served as an inspiration and a
+performance yardstick for many of this program's functions, and some
+of his generously donated code appears in the display code.  John is
+the author of the GRASP animation package.
+
+Bert Tyler, Timothy Wegner, and the rest of the Stone Soup Group
+inspired several features and did some testing as well.
+
+John Swenson, who knows more about how to use the program than even
+I do, provided invaluable insights.
+
+Thanks to Charles Marslett and STB Systems, Inc., for helping me
+suuport HiColor boards such as STB's PowerGraph Ergo.
+
+'GIF' and 'Graphics Interchange Format' are trademarks of CompuServe
+Incorporated, an H&R Block company.
+
+
+
+Author
+======
+
+Lee Daniel Crocker
+5506 Camden Ave #D3
+San Jose, CA  95124
+
+The best way to reach me is to type GO PICS on CompuServe and leave
+mail to user ID [73407,2030].  I read these messages two or three
+times a week.
+
+I am also reachable on Usenet as "lee@mport.com" (uunet!mport!lee).

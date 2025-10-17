@@ -1,0 +1,74 @@
+; NTSC Filter parameter section (required only if filtering images)
+; Copied from SDK documentation (Machine readable copy not provided)
+[NTSCParams]
+
+; Define filters
+[filter 1]
+xdim = 1
+ydim = 3
+weights = .1 .8 .1
+
+[filter 2]
+xdim = 1
+ydim = 5
+weights = .05 .15 .6 .15 .05
+
+; Define chroma-crawl reduction filters
+[ChromaCrawlReduction]
+Y FilterIndex = 1
+Y FilterOption = CUMULATIVE
+Y Threshold = 60
+Y FilterMaxScan = 2
+
+I FilterIndex = 2
+I FilterOption CUMULATIVE
+I Threshold = 12
+I FilterMaxScan = 0
+
+Q FilterIndex = 2
+Q FilterOption = CUMULATIVE
+Q Threshold = 20
+Q FilterMaxScan = 0
+
+; Define flicker-reduction filters
+[FlickerReduction]
+Y FilterIndex = 2
+Y FilterOption = CUMULATIVE
+Y Threshold = 70
+Y FilterMaxScan = 1
+
+I FilterIndex = 2
+I FilterOption = CUMULATIVE
+I Threshold = 20
+I FilterMaxScan = 1
+
+Q FilterIndex = 2
+Q FilterOption = CUMULATIVE
+Q Threshold = 20
+Q FilterMaxScan = 1
+
+[ApplyDirective]
+ApplyFirst = ChromaCrawlReduction
+MaxCycles = 1
+
+; Define Scaling Parameters (required only if scaling images)
+; [ScanParams]
+; proportional
+; x=320
+
+; Output section (required)
+[IO]
+
+[Output]
+OutputDir = f:\rd\home\ksmith1\business\vis
+[Operations]
+;Scale
+NTSC
+TGA24
+
+[Input]
+f:\rd\home\ksmith1\business\vis\ksmith\aeriala.tga
+
+
+
+

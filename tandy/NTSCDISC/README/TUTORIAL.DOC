@@ -1,0 +1,22 @@
+TUTORIAL.DOC
+
+The tutorial that is located on the disc can be run by inserting the disc
+into a VIS system and booting.  Select the "Talking Tutorial" button and the
+demo will run.  The demonstration requires that you have the audio connected
+and turned up.
+
+The entire demonstration runs in 640x400x256.  
+
+Note that after the discussion of pincushioning, the demonstration ends.
+This is normal.
+
+All of the still images from the demonstration may be viewed at your
+own pace by selecting the "Tutorial Stills" button at the main menu.
+The hand controller may be used to step forward and backwards through
+the images.
+
+The audio for the tutorial mentions the Haiku Software Development Kit
+and the utility FILTER24.  Microsoft has since changed the name of both
+of these items.  The CONVER24 utility may now be found in the Modular
+Windows Software Development Kit (SDK).
+

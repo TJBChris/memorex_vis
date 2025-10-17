@@ -1,0 +1,1115 @@
+[ver]
+	4
+[sty]
+	
+[files]
+[charset]
+	82
+	ANSI (Windows, IBM CP 1252)
+[revisions]
+	0
+[prn]
+	HP LaserJet IIIP
+[port]
+	LPT1:
+[lang]
+	1
+[desc]
+	
+	
+	
+	
+	
+	719542779
+	1
+	719541407
+	20
+	3
+	0
+	0
+	0
+	0
+	
+	
+	
+	
+	
+	
+	1
+[fopts]
+	0
+	1
+	0
+	0
+[lnopts]
+	2
+	Body Text
+	1
+[docopts]
+	5
+	2
+[GramStyle]
+	
+[tag]
+	Body Text
+	2
+	[fnt]
+		Times New Roman
+		240
+		0
+		49152
+	[algn]
+		1
+		1
+		0
+		0
+		0
+	[spc]
+		33
+		288
+		1
+		0
+		144
+		1
+		100
+	[brk]
+		4
+	[line]
+		8
+		0
+		1
+		0
+		1
+		1
+		1
+		10
+		10
+		1
+	[spec]
+		0
+		0
+		
+		0
+		1
+		1
+		0
+		0
+		0
+		0
+	[nfmt]
+		280
+		1
+		2
+		.
+		,
+		$
+	Body Text
+	0
+	0
+[tag]
+	Body Single
+	3
+	[fnt]
+		Arial
+		280
+		0
+		16385
+	[algn]
+		1
+		1
+		0
+		0
+		0
+	[spc]
+		33
+		331
+		1
+		144
+		72
+		1
+		100
+	[brk]
+		4
+	[line]
+		10
+		0
+		1
+		0
+		1
+		1
+		1
+		10
+		10
+		1
+	[spec]
+		0
+		0
+		
+		0
+		1
+		1
+		0
+		0
+		0
+		0
+	[nfmt]
+		280
+		1
+		2
+		.
+		,
+		$
+	Body Single
+	0
+	0
+[tag]
+	Bullet
+	4
+	[fnt]
+		Times New Roman
+		240
+		0
+		49152
+	[algn]
+		1
+		1
+		0
+		288
+		288
+	[spc]
+		33
+		273
+		1
+		0
+		0
+		1
+		100
+	[brk]
+		4
+	[line]
+		8
+		0
+		1
+		0
+		1
+		1
+		1
+		10
+		10
+		1
+	[spec]
+		0
+		0
+		<*0>
+		360
+		1
+		1
+		0
+		0
+		0
+		0
+	[nfmt]
+		272
+		1
+		2
+		.
+		,
+		$
+	Bullet
+	0
+	0
+[tag]
+	Bullet 1
+	5
+	[fnt]
+		Times New Roman
+		240
+		0
+		49152
+	[algn]
+		1
+		1
+		288
+		288
+		288
+	[spc]
+		33
+		273
+		1
+		0
+		0
+		1
+		100
+	[brk]
+		4
+	[line]
+		8
+		0
+		1
+		0
+		1
+		1
+		1
+		10
+		10
+		1
+	[spec]
+		0
+		0
+		<*5>
+		0
+		1
+		1
+		0
+		0
+		0
+		0
+	[nfmt]
+		280
+		1
+		2
+		.
+		,
+		$
+	Bullet 1
+	0
+	0
+[tag]
+	Number List
+	6
+	[fnt]
+		Times New Roman
+		240
+		0
+		49152
+	[algn]
+		1
+		1
+		360
+		360
+		360
+	[spc]
+		33
+		273
+		1
+		0
+		0
+		1
+		100
+	[brk]
+		4
+	[line]
+		8
+		0
+		1
+		0
+		1
+		1
+		1
+		10
+		10
+		1
+	[spec]
+		0
+		0
+		<*:>.
+		360
+		1
+		1
+		0
+		0
+		0
+		0
+	[nfmt]
+		272
+		1
+		2
+		.
+		,
+		$
+	Number List
+	0
+	0
+[tag]
+	Subhead
+	7
+	[fnt]
+		Times New Roman
+		240
+		0
+		49155
+	[algn]
+		1
+		1
+		0
+		0
+		0
+	[spc]
+		33
+		273
+		1
+		72
+		72
+		1
+		100
+	[brk]
+		4
+	[line]
+		8
+		0
+		1
+		0
+		1
+		1
+		1
+		10
+		10
+		1
+	[spec]
+		0
+		2
+		
+		0
+		1
+		1
+		0
+		0
+		0
+		0
+	[nfmt]
+		272
+		1
+		2
+		.
+		,
+		$
+	Subhead
+	0
+	0
+[tag]
+	Title
+	8
+	[fnt]
+		Arial
+		360
+		0
+		16385
+	[algn]
+		4
+		1
+		0
+		0
+		0
+	[spc]
+		33
+		446
+		1
+		144
+		72
+		1
+		100
+	[brk]
+		16
+	[line]
+		8
+		0
+		1
+		0
+		1
+		1
+		1
+		10
+		10
+		1
+	[spec]
+		0
+		1
+		
+		0
+		1
+		1
+		0
+		0
+		0
+		0
+	[nfmt]
+		272
+		1
+		2
+		.
+		,
+		$
+	Title
+	0
+	0
+[tag]
+	Header
+	9
+	[fnt]
+		Times New Roman
+		240
+		0
+		49152
+	[algn]
+		1
+		1
+		0
+		0
+		0
+	[spc]
+		33
+		273
+		1
+		0
+		0
+		1
+		100
+	[brk]
+		4
+	[line]
+		8
+		0
+		1
+		0
+		1
+		1
+		1
+		10
+		10
+		1
+	[spec]
+		0
+		0
+		
+		0
+		1
+		1
+		0
+		0
+		0
+		0
+	[nfmt]
+		280
+		1
+		2
+		.
+		,
+		$
+	Header
+	0
+	0
+[tag]
+	Footer
+	11
+	[fnt]
+		Times New Roman
+		240
+		0
+		49152
+	[algn]
+		1
+		1
+		0
+		0
+		0
+	[spc]
+		33
+		273
+		1
+		0
+		0
+		1
+		100
+	[brk]
+		4
+	[line]
+		8
+		0
+		1
+		0
+		1
+		1
+		1
+		10
+		10
+		1
+	[spec]
+		0
+		0
+		
+		0
+		1
+		1
+		0
+		0
+		0
+		0
+	[nfmt]
+		280
+		1
+		2
+		.
+		,
+		$
+	Footer
+	0
+	0
+[tag]
+	Ex
+	12
+	[fnt]
+		Courier
+		160
+		0
+		1
+	[algn]
+		1
+		1
+		1800
+		0
+		0
+	[spc]
+		40
+		200
+		1
+		19
+		110
+		1
+		100
+	[brk]
+		36
+	[line]
+		8
+		0
+		1
+		0
+		1
+		1
+		1
+		10
+		10
+		1
+	[spec]
+		0
+		0
+		
+		0
+		1
+		1
+		0
+		0
+		0
+		0
+	[nfmt]
+		280
+		1
+		2
+		.
+		,
+		$
+	Ex
+	11
+	1
+	2180
+	1
+	2560
+	1
+	2940
+	1
+	3320
+	1
+	3700
+	1
+	4320
+	1
+	5040
+	1
+	5760
+	1
+	6480
+	1
+	7200
+	1
+	7920
+	0
+[tag]
+	Table Text
+	0
+	[fnt]
+		Times
+		190
+		0
+		0
+	[algn]
+		1
+		1
+		0
+		0
+		0
+	[spc]
+		40
+		210
+		1
+		40
+		50
+		1
+		100
+	[brk]
+		36
+	[line]
+		8
+		0
+		1
+		0
+		1
+		1
+		1
+		10
+		10
+		1
+	[spec]
+		0
+		0
+		
+		0
+		1
+		1
+		0
+		0
+		0
+		0
+	[nfmt]
+		280
+		1
+		2
+		.
+		,
+		$
+	Table Text
+	11
+	1
+	720
+	1
+	1440
+	1
+	2160
+	1
+	2880
+	1
+	3600
+	1
+	4320
+	1
+	5040
+	1
+	5760
+	1
+	6480
+	1
+	7200
+	1
+	7920
+	240
+[tag]
+	Normal
+	0
+	[fnt]
+		Times New Roman
+		200
+		0
+		0
+	[algn]
+		1
+		1
+		0
+		0
+		0
+	[spc]
+		40
+		230
+		1
+		100
+		90
+		1
+		100
+	[brk]
+		36
+	[line]
+		8
+		0
+		1
+		0
+		1
+		1
+		1
+		10
+		10
+		1
+	[spec]
+		0
+		0
+		
+		0
+		1
+		1
+		0
+		0
+		0
+		0
+	[nfmt]
+		280
+		1
+		2
+		.
+		,
+		$
+	Normal
+	11
+	1
+	720
+	1
+	1440
+	1
+	2160
+	1
+	2880
+	1
+	3600
+	1
+	4320
+	1
+	5040
+	1
+	5760
+	1
+	6480
+	1
+	7200
+	1
+	7920
+	0
+[lay]
+	Standard
+	513
+	[rght]
+		15840
+		12240
+		1
+		1440
+		1440
+		1
+		1440
+		1440
+		0
+		1
+		0
+		1
+		0
+		2
+		1
+		1440
+		10800
+		12
+		1
+		720
+		1
+		1440
+		1
+		2160
+		1
+		2880
+		1
+		3600
+		1
+		4320
+		1
+		5040
+		1
+		5760
+		1
+		6480
+		1
+		7200
+		1
+		7920
+		1
+		8640
+	[hrght]
+	[lyfrm]
+		1
+		11200
+		0
+		0
+		12240
+		1440
+		0
+		1
+		3
+		1 0 0 0 0 0 0
+		0
+		0
+		1
+	[frmlay]
+		1440
+		12240
+		1
+		1440
+		72
+		1
+		792
+		1440
+		0
+		1
+		0
+		1
+		1
+		0
+		1
+		1440
+		10800
+		2
+		2
+		4680
+		3
+		9360
+	[txt]
+>
+	[frght]
+	[lyfrm]
+		1
+		13248
+		0
+		14400
+		12240
+		15840
+		0
+		1
+		3
+		1 0 0 0 0 0 0
+		0
+		0
+		2
+	[frmlay]
+		15840
+		12240
+		1
+		1440
+		792
+		1
+		14472
+		1440
+		0
+		1
+		0
+		1
+		1
+		0
+		1
+		1440
+		10800
+		2
+		2
+		4680
+		3
+		9360
+	[txt]
+>
+[elay]
+[lay]
+	1
+	519
+	[rght]
+		15840
+		12240
+		1
+		1800
+		1440
+		1
+		1440
+		1800
+		0
+		1
+		2
+		1
+		0
+		1
+		1
+		1800
+		10440
+		11
+		1
+		720
+		1
+		1440
+		1
+		2160
+		1
+		2880
+		1
+		3600
+		1
+		4320
+		1
+		5040
+		1
+		5760
+		1
+		6480
+		1
+		7200
+		1
+		7920
+	[hrght]
+	[lyfrm]
+		1
+		11200
+		0
+		0
+		12240
+		1440
+		0
+		1
+		3
+		1 0 0 0 0 0 0
+		0
+		0
+		3
+	[frmlay]
+		1440
+		12240
+		1
+		1800
+		72
+		1
+		792
+		1800
+		0
+		1
+		0
+		1
+		1
+		0
+		1
+		1800
+		10440
+		2
+		2
+		4680
+		3
+		9360
+	[txt]
+>
+	[frght]
+	[lyfrm]
+		1
+		13248
+		0
+		14400
+		12240
+		15840
+		0
+		1
+		3
+		1 0 0 0 0 0 0
+		0
+		0
+		4
+	[frmlay]
+		15840
+		12240
+		1
+		1800
+		792
+		1
+		14400
+		1800
+		0
+		1
+		0
+		1
+		1
+		0
+		1
+		1800
+		10440
+		2
+		2
+		4680
+		3
+		9360
+	[txt]
+>
+[elay]
+[l1]
+	1
+[pg]
+	3
+	8 431 92 512 0 0 0 65535 117 1	65535 0 0	0 0 0 0 0 0 0 65535 0 0 65535 0 0 0 0 0
+	14 833 83 512 0 0 0 65535 2 1	65535 0 0	0 0 0 0 0 0 0 65535 0 0 65535 0 0 0 0 0
+	18 0 0 1025 0 0 0 65535 65535 1	65535 0 0	0 0 0 0 0 0 0 65535 0 0 65535 0 0 0 0 0
+[edoc]
+@Body Single@<:#342,8640><:f280,BArial,0,0,0><+!>NTSC<-!><:f280,,><:f>
+
+<:#1420,8640><:f240,6Times New Roman,0,0,0>Programming for VIS means dealing not only with a new machine, but with a type of display that many of us are not yet very familiar with ...the color TV.  The video system used by color TV</R>s in America is called NTSC.  This 
+is a short tutorial on how to have your apps look their best on NTSC. These rules are also applicable to PAL-I, the television standard in Europe.
+
+@Body Single@<:#342,8640><:f280,BArial,0,0,0><+!>200 vs 400 Lines<-!><:f>
+
+<:#1420,8640><:f240,6Times New Roman,0,0,0>The first and most important decision in regard to your VIS application, is which video mode or modes it will use.  Keep in mind the following rule, 
+</S><+#>Always<-#> prefer 200 line modes to 400 line modes!</T>  If you think you might need a 400 line mode, be sure and re-think before proceeding.  Why such a stern warning? It'll soon become apparent as we display the problems certain imaages can have i
+n a 400 line mode.
+
+@Body Single@<:#342,8640><:f280,BArial,0,0,0><+!>Author and Test Images On A Variety of TVs<-!><:f>
+
+<:#1988,8640><:f240,6Times New Roman,0,0,0>After selecting the video mode you'll need, the next most important thing you can do to improve the quality of your video is to both author and test your images on a TV.  Part of your testing should be in a worst case environme
+nt consisting of an inexpensive consumer television with the video signal coming from the RF output on the back of the VIS.  B<:f><:f240,6Times New Roman,0,0,0>oth the composite and S-Video outputs provide a<:f><:f240,6Times New Roman,0,0,0> much better sig
+nal than the RF output and do not reflect a worst case image. Many problems cannot be detected on VGA or high quality TV.
+
+<:#2840,8640><:f240,6Times New Roman,0,0,0><:f><:f240,6Times New Roman,0,0,0>As shown in this example, single pixel width horizontal and near-horizontal lines show dramatic flickering in 400 line mode.This is due to the interlaced nature of NTSC.  Two-pixel width lines 
+have less flickering, but still are not as stable as 200 line modes on VIS.  This flickering is normally most apparent in man-made 
+<:f><:f240,6Times New Roman,0,0,0>images--natural images typically have more gradual luminance and color changes and less flickering as flickering is due to drastic differences between the brightness of pixels on adjacent lines.  The more dramatic the diffe
+rence, the more dramatic the flickering.  The ear shown here flickers badly because it's colors are dithered--where a pure red pixel occurs on one line the adjacent line has a pure white pixel. The color that was desired was 
+</S>Pink</T>, the color that was achieved has <+#>no name<-#>.
+
+<:f240,6Times New Roman,0,0,0><:f><:f240,6Times New Roman,0,0,0>Before you laugh, let me tell you that we have seen<:f><:f240,6Times New Roman,0,0,0> many images as bad or worse than this.  Many of the images have been from established software vendors who 
+have equipment and talent, but they failed to look at their images in the environment that they were developing for.  Please don</R>t make the same mistake. These problems cannot be easily detected using VGA or high quality monitors. A real consumer-grade T
+V is needed.<:p<* >>
+
+@Body Single@<:#342,8640><:f280,BArial,0,0,0><+!>Piclab<-!><:f>
+
+<:#2272,8640><:f240,6Times New Roman,0,0,0>Here is the first version of the image that was displayed earlier.  Note the distinct flicker around the top edge of the machine.  The flicker was removed by using a program called Piclab which is available on Tandy</R>s bullet
+in board system and in the software subdirectory of <+#>this<-#> CD.  The image was rescaled from its original resolution of 640 x 400 to 640 x 200 and then rescaled back to 640 x 400.  This removed sharp color transitions between lines.  Here</R>s another 
+look at the results.  This simple technique is all that is necessary for many images and you still have twice the resolution that you would have in a 320 x 200 image.<:f><:f240,6Times New Roman,0,0,0>
+
+@Body Single@<:#342,8640><:f280,BArial,0,0,0><+!>Oversaturation<-!><:f>
+
+<:#2272,8640><:f240,6Times New Roman,0,0,0><:f><:f240,6Times New Roman,0,0,0><:f>Colors should not be over saturated.  Bright colors will tend to 
+</S>bloom</T> past the pixels that are directly affected onto adjacent pixels.  The solution to this is to reduce the brightness of the problem areas in an image.  If you are having a problem with colors smearing over onto adjacent pixels then you might try
+ reducing the intensity of your colors to 70% of full intensity.  That means that if you are now using a range from 0-255 in your images, that you would reduce it to 0-179.  Please note: This is 
+<+#>not<-#> a general case solution!  This will cause your images to be darker and only you can determine if your images are reduced too much in quality by that 
+
+<:#1988,8640>Let</R>s use this image of the flag to demonstrate how you can use Piclab to help you identify problem images.  We can load the image into Piclab whether it is 256 color or 24 bit.  After loading the image we can get Piclab to generate a greyscale version o
+f the image.  The greyscale image simply reflects the brightness of each pixel on the screen.  As a last step we darken the image by 179.  The resulting image will show any areas that are brighter than 70% of full intensity and allow you to make decisions a
+bout their severity and whether the image needs to be toned down.<:f240,6Times New Roman,0,0,0>
+
+<:f240,6Times New Roman,0,0,0>As we saw earlier, even natural images can display significant flickering.  This image of scattered pine needles is a more difficult image that displays not only flicker but chroma crawl from oversaturated colors.  Here's a ver
+sion of the same image, improved as the result of reducing the vertical resolution by scaling down and back up--the same method we used on the image of the back of the machine.  Clearly there is still a great deal of chroma crawl.  The next and last image o
+f the trio is the output of the program <+">Filter24<-"> that Microsoft supplies with the Haiku SDK.  The image has lost detail compared to the original but no longer shows significant crawl or flicker.  Only you can decide how much quality loss you can liv
+e with to alleviate NTSC problems and <+#>remember<-#> only by looking at your images in a worst case environment can you see what your problems are.<:p<* >>
+
+@Body Single@<:#342,8640><:f280,BArial,0,0,0><+!>TV Quality<-!><:f>
+
+<:#1704,8640><:f240,6Times New Roman,0,0,0><:f><:f240,6Times New Roman,0,0,0><:f><:f240,6Times New Roman,0,0,0><:f>The last problem that we will discuss is not a function of NTSC or of the VIS machine but of the quality of the TV used.  Many TV</R>s demonstrate an effec
+t called pincushioning.  This is seen as a shortening or lengthening of pixel lines due to brightness changes over the course of the lines.  As a result the right side of the image seems to bend inward or outward and may even warp back and forth if the imag
+e is changing.  This animation demonstrates how pincushioning can appear on a TV.
+
+<:#1988,8640>The animation grossly exaggerates the effects of pincushioning but will give you an idea of what to look for.  If you have pincushioning problems in your video then you may want to consider using the BIOS to change the border color for your application.  Us
+ing the animation as an example, we can see that if a black border had been set before running the animation, that it would have been imposible to see the effects of pincushioning.  The only way to actually reduce the effects of pincushioning is to flatten 
+the brightness range of your images in the manner that was discussed previously with respect to over saturation.<:f240,6Times New Roman,0,0,0>
+
+<:#284,8640>
+
+>
+
+[Embedded]
+00014706

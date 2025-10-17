@@ -1,0 +1,652 @@
+MODES(C)							MODES(C)
+
+MODES   -   Displays various test and resolution patterns
+
+Syntax
+	MODES	(There are no command line options)
+
+MODES displays many of the standard video test patterns used to adjust
+and align television equipment.  It also displays resolution patterns
+to help the user to understand the limitations of color television, and
+to demonstrate how to avoid the problems caused by the limitations.
+
+MODES is optimized for NTSC television, the format used in the United
+States, Canada, and Japan.  While the images can be used on PAL equipment,
+differences between the two standards will reduce the utility of this
+program.
+
+Once MODES has started executing, you may issue any of the following
+commands, one per command line.   Items shown in brackets are optional.
+All commands consist of single characters, so the syntax [xy] means that
+the character x, y or neither can be specified, but not both.
+
+Commands
+?		Displays a brief command summary.
+
+
+b [71+c][s][n]	Displays color bars in various formats.
+		The 320x200 video mode is used, and the "i" command will
+		affect this display.
+		By default, 100% gamma corrected bars are displayed.
+		When displayed on a BW monitor, the upper SMPTE colored
+		bars are ordered by decreasing brightness.
+
+  [7]		Adjusts the brightness to 75% gamma corrected.
+  [1]		Adjusts the brightness to 100% gamma corrected.
+		(100% and 75% are the SMPTE 240-1988 brightness levels
+		 used in television production.)
+  [+] 		The maximum brightness that the system can be produce
+		is displayed.  This is significantly higher than the
+		100% value.
+  [c]		Displays all three brightness levels at the same time.
+  [s]		Some of the alternate patterns are eliminated, leaving
+		a test pattern closer to the SMPTE pattern.
+		(It is not possible to exactly reproduce the SMPTE
+		 pattern in the digital domain, as some of the lower
+		 sections of the SMPTE pattern consist of chrominance signal
+		 with no luminance.  This area has been replaced by a
+		 grey-scale chart.)
+  [n]		The text describing the various fields is not displayed.
+
+
+
+ p [rgbw]	Displays one of the specified colors at 100% gamma
+		correction on the entire screen.  This can be used to check
+		the purity adjustments of a given receiver.  Each color
+		(particularly red) should uniformly fill the screen.  If
+		any portion of the screen contains any other color or a
+		less-than-pure shade of the color being displayed, the
+		receiver needs to be realigned.  If a monitor has been
+		affected by the shadow mask being distorted, the condition
+		will be visible.
+
+		The options provide Red, Green, Blue, and White screens
+		in the 320x200 video mode.  The "i" command will affect
+		this display.  Note that most televisions specify Red
+		as the color to use for the purity test.  Check your
+		your service manual before attempting any purity adjustments.
+
+
+
+c		Displays the traditional crosshatch in 100% gamma corrected
+		white, in the 320x200 video mode.  The crosshatch is used
+		to verify that the receiver has correct convergence.  If
+		any significant amount of a non-white color can be seen
+		along the lines, the receiver may need to be degaussed or
+		have its convergence reset.
+
+		Note that it is usually impossible to get the convergence
+		of a triad (3-dot as opposed to 3-stripe) receiver perfect,
+		so slight convergence errors in the extreme corners of 
+		the display is considered acceptable.  Convergence errors
+		in the middle two thirds of the screen are not acceptable and
+		indicates a problem with the receiver.
+
+		Check your service manual before attempting any convergence
+		adjustments.
+
+		The "i" command will affect the display in this command.
+
+
+
+h [n]		Displays a horizontal resolution pattern in the 320x200
+		video mode.  (The "i" command will affect the display in
+		this command.)
+
+6h [n]		Displays a horizontal resolution pattern in the 640x400
+		video mode.  (The "i" command has no effect on this command.)
+
+		These charts demonstrate the bandwidth limitations imposed
+		on NTSC television.  For luminance (differences in brightness),
+		the best possible resolution at the composite or RF output
+		is approximately 330 lines.   However to provide the same
+		aspect ratio as a VGA display, the VIS system uses less than
+		the full width of the CRT, so images produced by VIS are limited
+		to around 310 lines of horizontal luminance resolution.
+
+	 	The "n" turns off the labels that identify the various areas
+		of the display.
+		
+		The Black and White column shows that as you reach 320 lines
+		(every other pixel is white or black) the ability to display
+		images with large changes in brightness is reduced.  If
+		examined on a VGA monitor (this program will run on VGA
+		monitors with VESA support), the alternating lines can be
+		seen clearly, but the ability to display sharp changes in
+		brightness is limited in television.
+		
+		As the resolution of the image goes above 330 lines (as in the 
+		640x400 video mode), the resulting image will flatten to a
+		shaded area with little or no detail.  The area may also have
+		a color tint appear that was not any of the colors (or shades)
+		that the software displayed.
+
+		The Color sections of the resolution chart demonstrate that
+		the color component of a television signal is bandwidth
+		limited (that means resolution limited) even more than the
+		luminance (brightness) signal.
+
+		When NTSC television was designed, it was decided to use
+		most of the available bandwidth for luminance (brightness)
+		information, and the remainder (about 1/6th of the total
+		video bandwidth) for color information.   The decision was
+		based on the fact that the human eye is more sensitive
+		to brightness changes than to color changes, and most TV
+		viewers were expected to be some feet from the screen, and
+		small color details would not be visible anyway.
+
+		Color (chrominance) information is also transmitted
+		differently than the luminance information.  The color of
+		a given location on the screen is determined by the phase of
+		the color signal at that point in time.  By using the phase
+		of a signal, the Red, Green and Blue components are all
+		multiplexed into a single signal. 
+
+		Actually, the color signal is transmitted as two signals,
+		I and Q, but most televisions only bother to decode one.
+		Decoding both would increase the resolution of the color
+		signal slightly, but would increase the cost of the receiver
+		as well.
+
+		Because color is transmitted as the phase of a signal, the
+		time to change from displaying one color to another is
+		dependent on how far apart the two colors are in terms of phase.
+		The further apart they are, the longer it will take to stop
+		displaying one color and to completely change to the next
+		desired color that is to be displayed.  Since time equals
+		horizontal distance on a CRT, the choice of colors decides the
+		how close together color changes can occur.   (This
+		explanation has been simplified and some details have been
+		omitted.)
+
+		Here are the main colors and their phase relationship.
+		0 &	90	120	180	240	300	0 &
+	        360					        360
+		GREEN   YELLOW  RED     MAGENTA BLUE    CYAN    GREEN
+
+		An image that contained colors that varied between
+		Red and Yellow can display more color detail than an
+		image that contained colors that varied between Cyan
+		and Red.  Red and Yellow are 60 degrees apart, where
+		Blue and Cyan are 180 degrees apart.  Trying to display
+		a highly detailed image made up of colors that are 180
+		degrees apart is the worst possible combination. 
+		
+		Green and Magenta as well as Yellow and Blue are also
+		180 degrees apart, and therefore are more limited in the
+		number of color changes that can be displayed across a
+		line.  Usually, man-made and computer-generated images tend
+		to have more sudden color changes than natural objects, and
+		television is optimized for the latter.
+
+		As the test pattern shows, for the colors that are 180
+		degrees out of phase, the clarity and sharpness of the
+		colors starts to degrade at around 64 lines of resolution,
+		and by 107 lines of resolution, the colors are no longer
+		recognizable.  At 320 lines, a curious effect may occur
+		(depending on your receiver and whether you are using
+		composite video or not) where the entire area appears
+		to be shaded the same color, and the color may not be
+		either of the two colors that the program is trying to display.
+
+		For colors that are 60 degrees out of phase with one another,
+		the colors remain accurate longer.  The finest accurate color
+		changes possible at the smalled phase change are about
+		4 pixels apart in 320x200 modes and 8 pixels in 640x400 modes.
+		Color changes finer than that will not yield accurate color on
+		the receiver and can cause other artifacts.
+
+		A common misconception is that the S-video connector
+		yields a better picture than the composite output.  The
+		S-video output from a NTSC device almost always produces a
+		luminance signal with higher resolution (as high as 500 lines
+		has been claimed for high-end Beta equipment and laser discs
+		have a maximum of 425 horizontal lines).  However, the
+		majority of the equipment generates a chrominance signal that
+		has the same resolution as the signal coming out of the
+		composite output.   In addition, many TVs would not utilize
+		the higher frequency chrominance signal if one was supplied
+		to the TV.   All to often this signal ends up going to the
+		same circuitry that the composite chrominance signal would be
+		sent to and any higher bandwidth chrominance detail would
+		be ignored or misprocessed.
+	
+		The chrominance signal that the VIS generates on the
+		S-Video connector has the same resolution as the signal
+		supplied at the composite connector.
+
+
+
+v [n]		Displays a vertical resolution pattern in the 320x200 video
+		mode.  (The "i" command will affect the display in this
+		command.)
+
+6v [n]		Displays a vertical resolution pattern in the 640x400 video
+		mode.  (The "i" command has no effect on this command.)
+
+		The vertical patterns demonstrate that there is no color
+		or luminance bandwidth restriction in the vertical axis
+		on television.  Each line can contain a color that is
+		up to 180 degrees out of phase (worst case) with the color
+		located on the line above or below, and all the colors will
+		be displayed correctly.  The "n" command disables the titles.
+
+		Sharp brightness changes in the vertical direction can
+		be displayed, but can cause a problem known as Interlace
+		Flicker.  All current television systems rely on a display
+		organization known as Interlaced Video.  In Interleaved video,
+		the screen is divided into even numbered and odd numbered scan
+		lines.  These divisions are called Fields.
+
+		All the even lines are drawn, then all the odd numbered
+		lines are drawn.  Two Fields comprise a Frame.  NTSC
+		television is transmitted at 30 frames per second, or
+		60 fields.  PAL and SECAM-I television are transmitted
+		at 25 frames per second, or 50 fields.
+
+		The idea is that every area of the screen is refreshed
+		(or drawn) 60 times a second (NTSC), but each line is
+		only drawn 30 times a second.
+
+		Because the human eye can perceive the blinking of a light
+		that flashes on and off 30 times a second, but can barely
+		tell at 60 flashes per second, this method of drawing the
+		screen was used to reduce the perception of flicker.
+		This works, provided that no two adjacent lines have light
+		levels that are very different from one another.
+
+		If a bright horizontal line appears in an area that is
+		dark, this line will only be drawn 30 times a second, and
+		for most people this will be seen as a flickering line.
+		If the line was wider or the neighboring lines had 
+		brightness levels similar or identical to the bright line,
+		the flickering would not be recorded by the eye.
+
+		Television cameras automatically average brightness levels
+		in the vertical axis to reduce the flickering effect.  
+		However, computer-generated images must be processed or
+		else they can cause significant flickering that can be
+		objectionable to the viewer.
+
+		In the 320x200 test pattern, you will notice that the image
+		is perfectly stationary and does not appear to flicker
+		at all, despite the obvious brightness changes from one
+		line to the next.  The reason the flicker is not being
+		seen is due to a special video mode the VIS system uses
+		in the 200 line video modes.  It is called Line Pairing.
+
+		In Line Pairing, the timing of the odd lines is adjusted
+		so that the receiver displays them in the same locations
+		where the even scan lines were drawn, instead of the correct
+		location.  The result is that the parts of the CRT that
+		are illuminated for even lines are also illuminated for
+		odd lines, so these spots are illuminated 60 times a
+		second, which is near the limit of human perception.
+
+		The areas where the odd lines should have been drawn remain
+		dark when Line Pairing is active, which does make the
+		image look like it is being viewed through screen wire.
+
+		Another factor has to do with television organization.
+		NTSC television consists of 525 horizontal scan lines,
+		approximately 483 of which are visible, and the VIS system
+		uses 400 of them.  When the VIS is running in a 200 line
+		mode, each line of information is displayed twice, once in a
+		even line and once in the next odd line.  With Line Pairing
+		enabled, these two lines that have exactly the same
+		information are drawn in the same location on the CRT, 
+		resulting in a flicker-free image.
+
+		For example, if you display the 320x200 vertical pattern
+		("v" command), and then use the "i 0" command to turn
+		on Line Pairing, and "i 1" to turn it off, you will be
+		able to see the effect that Line Pairing has on the image
+		stability.  (See "i" command for more information.)
+		By default, VIS turns Line Pairing on in all 200 line
+		video modes.
+
+		In the 640x400 vertical test, you can see the full effect
+		of having significant brightness changes between horizontal
+		lines.  Line Pairing is not possible in the 640x400 mode,
+		so the screen will always exhibit some flicker and jitter.
+
+
+
+6s		Various shapes and objects are displayed in the 640x400 video
+		mode to show the effects that horizontal bandwidth
+		restrictions and interlace flicker have on images that look
+		fine on non-interlaced VGA monitors.  The objects are
+		discussed by section.
+
+		(Note that only the horizontal color and luminance limits
+		 affect 200 line video modes.  All of the other problems
+		 discussed below exist ONLY in the 400 line video modes.
+		 The fact that the 200 line mode avoids so many problems
+		 should be considered when deciding what video resolution to
+		 use for an application.)
+
+
+	Buttons (Wrong on Left, Better on Right)
+
+		This first section deals with shapes, symbols, and icons.
+		Objects of this type are common in graphical applications,
+		and are an area of significant problem when an existing
+		application is converted over to a TV-based environment.
+
+	Buttons 1 & 2 (Starting on the left)
+
+		The problem with these two images is that they are too
+		small.  These images are 11x11 pixels in size.  Television
+		not only has much lower resolution than an application written
+		for 640x400 was expecting, but usually the user of a TV-based
+		application is several feet away from the display.  The
+		recommended viewing distance for television is 4 to 8
+		times the height of the display.  By contrast, the viewing
+		distance of a VGA monitor is usually 2 to 3 feet regardless
+		of the size of the display.
+
+		Most broadcast television producers limit themselves to text
+		fonts that are able to get a maximum of 35 characters across the
+		screen, and a maximum of 14 lines of text on the screen
+		at a time.  In addition, the fonts are designed to avoid
+		interlace flicker, chroma-crawl and video-ringing, an effect
+		where a ghost of a bright object can be seen to the right
+		or left of the actual image.
+
+		Note that the colored icon ends up looking like a colored
+		smear, with the color spreading beyond the symbol.  This
+		is caused by the inability of NTSC color to respond to
+		sudden changes in color.  (See the "h" command for more
+		information.)
+
+		Most 640x400 applications that are converted to the TV
+		environment are guilty of not correcting the size of small
+		objects on the screen.
+
+	Button 3
+
+		This button has a single-width outline in black and a
+		fully-saturated (Red) icon.  As always, images that are
+		being displayed in 640x400 must avoid single line 
+		brightness changes.  Although it would have looked worse
+		if the line had been white instead of black, the fact
+		that the adjacent lines are now brighter cause the
+		adjacent lines to appear to flicker slightly.
+		(Button 3 through 8 are all 37 pixels tall and wide.)
+
+		The size of the entire button is about as small as you
+		should go, depending on what you intend to portray on
+		the button.  In this case, the button is too small because
+		the bright red color that was selected bleeds too much
+		and has a lot of chroma-crawl (the effect where brighter
+		spots of color in the colored image appear to move up or
+		down).  This could be corrected by using a less saturated
+		(pastel) shade of red, or preferably, a color other than
+		pure red.  (Red is probably the most difficult color for
+		television to reproduce accurately.)  Alternatively, the
+		object could have used a paler shade of red around the
+		edges or the symbol, or the symbol (and button) could be
+		made larger.
+
+	Button 4
+
+		This button adds to the problems of Button 3 by trying
+		to make the button look 3-dimensional by drawing a
+		white top and side to the button.  In this case, the
+		horizontal line is a single-width line and has a lot
+		of flicker, as it is adjacent to a black line.
+
+		The vertical line is three pixels wide, but looks
+		smaller.  Why?  Because a black line followed by a white
+		line in a 640 pixel mode exceeds the 330 line resolution of
+		TV.  It took three pixels of white just to get any
+		significant white displayed on a composite TV (S-video
+		performs better here).  Even then the vertical white
+		line does not appear to be as bright as the horizontal line
+		above, but it is.
+
+		If this 3-dimensional look is desired, the brightness
+		level must change gradually, which means using more
+		pixels (horizontally and vertically) to provide the
+		3-D look.  If possible, don't use black for the outline.
+		Use a medium brightness grey for the outline and for the
+		white area use increasing levels of white until you reach
+		the center (or just right of center) then decrease the
+		brightness until the levels are approaching the level
+		of the background for the button.  Remember that flicker
+		only occurs in the vertical axis, so you don't have to
+		take as much care on vertical lines as you do on
+		horizontal lines.
+
+	Button 5
+
+		This was an attempt to save on palette values by dithering
+		two colors to obtain several shades.  It doesn't work on
+		television (and it doesn't look much better on VGA).
+
+		In this case, the two colors were white and green.
+		However, both are at the maximum possible values, so
+		the white is actually a lot brighter than the green.
+		The flickering could be eliminated by computing a white
+		brightness level that is equivalent to maximum green.
+		But doing this also means that the area would appear to be
+		the same shade of grey when displayed on a black-and-white
+		display, which may not be desired.
+
+	Button 6 (Better version of Button 3)
+
+		Button 6 attempts to correct some of the problems with
+		Button 3.  The major changes are that the outline is
+		wider (but not gradually, which would be better), and
+		a lighter shade of red-orange was used, instead of the
+		fully-saturated pure red color.  The background also
+		has a slight red tint, and the single-line-tall red lines
+		are now doubled in height.  An additional refinement
+		was to use a very pastel red-orange color around the
+		edges of the object, but because of the choice of color
+		the improvement is minimal.  Abandoning the red or near
+		red color would help the most.
+
+	Button 7 (Better version of Button 4)
+
+		Button 7 uses a multi-line 3-D highlight of varying
+		brightness to reduce flicker.  The vertical line is
+		also "softened" to reduce ringing.  The color of
+		the icon is changed like Button 6, but the color is
+		solid over the entire icon instead of being different
+		at the edges.  The background of this button is the same
+		as Button 3.
+
+	Button 8 (Better version of Button 5)
+
+		Eight palette values were used to provide the gradual
+		shades from white to green, rather than dithering.
+		Some mild-in-line dithering could be done without
+		generating the flashing effect, but the brightness of
+		the colors on adjacent lines must still be carefully
+		controlled.
+
+
+	Horizontal Lines (Wrong on Left, Better on Right)
+
+		Here horizontal lines are drawn with various problems.
+		Each is discussed, starting with the upper left line.
+		Note that none of these problems occur in 320x200 with
+		Line Pairing enabled.
+
+	Line 1
+
+		This line is the number one mistake that is made when
+		generating images for television:  a line or bright
+		object that is only one line tall.  In this case,
+		the line is drawn at maximum brightness and due to the
+		difference between it and the background, it flickers
+		strongly.  (It would be worse if the background was darker.)
+
+		If the line must be kept the same width, the only possible
+		solution is to reduce the brightness difference between the
+		line and the background (See Line 1 on right).
+
+	Line 2
+
+		This line is only two lines tall, and it demonstrates a
+		common misperception.  As stated above, a single bright line
+		causes a lot of visible flicker, but it is the transition
+		from dim to bright and bright to dim that actually cause
+		the flickering effect to be noticed by the eye.
+
+		If a bright line is made wider but is still just as bright
+		(the brightness difference between adjacent lines remains
+		 the same), the flicker may appear to be lessened, but
+		it is still occurring along the top and bottom edges of
+		the bright object.
+
+		With a two-line-tall line, about the only thing that can
+		be done is to reduce the brightness of both lines (same
+		solution as Line 1).  See Line 2 on the right for
+		the reduced version.
+
+		It has been suggested that the first line can be dim and
+		the second line bright and most of the flicker is
+		eliminated.  This is partly true since the most sudden
+		bright-to-dim transition only exists on one edge, but this
+		trick can also benefit from a poor-quality power supply
+		in the TV receiver.  But this means that it may not look
+		the same on every TV, so this method should be avoided.
+
+	Line 3
+
+		On the left, the line is drawn with three bright lines,
+		all the same brightness.  On the right, the outer two
+		lines are drawn with a medium brightness shade.  This
+		makes the line look "soft", but greatly reduces the
+		flicker.
+
+	Line 4
+
+		Same as above, only four identical brightness lines are
+		used on the left and the brightness level is lower than
+		before.  This improves the flicker over the lines above this
+		one, but some flicker is still present.
+		
+		On the right, three different brightness-levels are used,
+		with line 3 being the brightness.  The one on the right
+		has that "soft" look, but almost no flicker.
+
+	Line 5
+
+		The line on the left is drawn with five identical
+		lines with reduced brightness, and the one on the right uses
+		three different brightness-levels, with line 3 being the
+		brightest.  Since the levels were picked carefully,
+		the flicker is barely perceptible.
+
+	Line 6
+
+		Line 6 on the left uses 5 lines at the maximum brightness.
+		The one on the right uses 5 lines at three brightness
+		levels.  It is identical to the line immediately above it.
+
+	Line 7
+
+		The problem of flicker is not limited to Black and White
+		lines.  Color can also flicker (Green is the worst
+		simply because a maximum output green is brighter than
+		a maximum output blue).  Color also adds the chroma
+		crawl, which on highly saturated images make the color
+		look noisy.  Chroma crawl is only obvious at the edge
+		of a colored area (refer to the left side of the "6h"
+		display), so when drawing narrow objects like lines, chroma
+		crawl will be evident.
+
+		On the right, the line (5 lines tall) was changed to use
+		several pastel shades of before using the maximum color
+		blue for Line 3.  This would have looked even better if
+		the maximum saturated Blue was not used and a more pastel
+		shade was substituted.
+
+
+	Vertical Lines
+
+		These groups of lines demonstrate the effect of color
+		smearing, chroma-crawl and ringing (depending on the
+		quality of your receiver).  The first group of lines
+		are one pixel wide, the second group two pixels wide, and the
+		last group are three pixels wide.
+
+		Note how the much the color overshoots the area that
+		was intended to be drawn (compare it to a VGA monitor).
+		On some monitors you may also see a ghost (a vertical
+		stripe on increased or decreased brightness) to the right
+		or left of the real stripes.  This is how television looks
+		all the time, but since TV normally has moving images,
+		these defects are hardly noticed.
+
+
+
+i [01]		This command enables or disables Line Pairing, a special
+		mode that is available on the VIS in the 200 line video modes.
+		When enabled (1), the even field and odd field overlap
+		one another exactly.  Since each pair of even and odd lines
+		in 200 line modes display the same information, this pairing
+		(or overlapping) of lines eliminates interlace flicker and
+		chroma crawl.
+
+		This command allows the difference in image quality to be
+		shown in this program.  The screen is not cleared when the
+		Line Pairing is enabled or disabled, so that the effect
+		can be compared.  All of the 200-line video patterns can
+		be used to examine this.  The Vertical Resolution ("v")
+		and the Color Bars are recommended as good examples.
+
+		Line Pairing remains enabled or disabled until you change
+		it with the "i" command or exit the program.  If you enter
+		400 line mode it is disabled automatically, but will be
+		reset to your preference when you return to a 200 line mode.
+		Line Pairing is on by default.
+
+		Line Pairing is not NTSC compliant, but the timing difference
+		is so slight that all receivers can deal with it.  However,
+		VCRs cannot reliably record video that has been Line Paired.
+		On playback, the image may roll as though there was no
+		vertical hold.
+
+		Applications that intend the VCR to be utilized should disable
+		line pairing. 
+		
+		Additional discussion on Line Pairing can be found in the
+		documentation on the "v" command.
+
+
+
+e [0-7]		Specifies the color of the border, outside the 320x200 or
+		640x400 area.  By default this area is black, but any
+		application can use this to fill the entire screen.  It is
+		recommended in 640x400 to eliminate the flicker that results
+		along the top and bottom of the 640x400 area if the
+		background color is too bright.  By filling the border area
+		with the same color, these edges are eliminated.
+		The Colors are:
+		0	1	2	3	4	5	6	7
+		BLACK	BLUE	GREEN	CYAN	RED	MAGENTA	YELLOW	WHITE
+
+		The border color remains in effect until you change it or
+		exit the program.
+
+		In an application the border color may be any of the 256
+		palette colors.  It is not limited to the colors used
+		in this program.
+
+
+q		Exits the MODES program.
+
+
+Notes
+
+This document describes "Version 1(1) - fdiv" of MODES.
+
+
+301191 fdiv
+---
+
+

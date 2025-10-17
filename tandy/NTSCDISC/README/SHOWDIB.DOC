@@ -1,0 +1,56 @@
+SHOWDIB(C)							SHOWDIB(C)
+
+
+SHOWDIB  -  Displays DIB files in 320x200x256 and 640x400x256 video modes
+
+Syntax
+	SHOWDIB [-n] [-f file] file1 [file2] ...
+
+SHOWDIB accepts the names of one or more DIB/BMP files and displays them
+one at a time.  The program can be used on any PC with VESA BIOS support,
+and can also be used on the VIS platform.  
+
+Options
+
+-n	 Do not display the filename on the screen.  By default the
+	 name of the file being displayed is shown in the upper left corner.
+
+-f file	 Accepts the name of a file containing a list of one or more files
+	 to display.  Files must be organized one per line.
+	 Additional files can be specified on the command line as well.
+
+When SHOWDIB is run, it sets the video mode that is correct for the given
+file, loads the palette, and then displays the image.  The name of the
+file is displayed, and SHOWDIB then waits for a command.  The following
+keys are accepted:
+
+Keyboard	VIS Hand	Action
+		Controller
+[SPACE]		A or S		Display next image
+[ENTER]		A or S		Display next image
+[DOWNARROW]	A or S		Display next image
+
+[UPARROW]	N or 1		Display previous image
+
+[HOME]		4		Display first image in list
+
+[END]		B or 3		Exit
+[BREAK]		B or 3		Exit
+[CTRL-C]	B or 3		Exit
+
+On a VIS system, the standard keyboard may also be used.
+
+While the image is being drawn, any of the above keys may be pressed
+and the drawing of the current image will be aborted and the specified
+operation will occur.
+
+
+Notes
+
+This documentation describes "Version 1(1) -fdiv"  of SHOWDIB.
+
+301161 fdiv
+
+---
+
+

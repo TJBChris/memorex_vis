@@ -1,0 +1,94 @@
+
+These changes to Image Alchemy 1.5.1 were made after the manual was
+printed:
+
+
+Use of extended and expanded memory
+    If there is enough extended or expanded memory available, Alchemy
+    will use it instead of the temporary files it would otherwise use
+    during some conversions.  To use extended memory you must have an
+    XMS driver installed in the config.sys file (such as HIMEM.SYS). 
+    To use expanded memory you must have a LIM 3.2 or LIM 4.0 expanded
+    memory driver (such as QEMM or 386MAX).  To disable the use of
+    extended and expanded memory, set an environment variable called
+    'alchemy' to 'x' (type "set alchemy=x" at the DOS prompt).
+
+    Note that the availability of extended or expanded memory will not
+    allow you to convert larger images, just save the time of writing
+    and reading raw files.  We are working on a 386 version of Image
+    Alchemy, which will allow 80386 and 80486 users to make use of the
+    linear addressing space of those processors to convert images of up
+    to 32000 x 32000 (assuming you have enough disk space).  Please
+    contact us if you are running out of memory and are interested in
+    upgrading to Alchemy-386.
+
+
+Checking for 8514/A boards
+    Alchemy will normally check to determine if there is an 8514/A
+    board installed in the computer when viewing images.  However, this
+    can cause problems with some network boards, as they use the same
+    I/O addresses that 8514/A boards use.  To disable 8514/A checking,
+    set the environment variable called 'alchemy' to '8' (type "set
+    alchemy=8" at the DOS prompt).  Note that this can be combined with
+    other options; for example, to disable both 8514/A checking and
+    extended/expanded memory usage, use "set alchemy=8x".
+
+
+New Sun Raster Output modes
+    Run length compression has been added to Sun Raster output for one and
+    eight bit files.  The output option for Sun Raster with compression
+    is '-s1'.  The default compression for Sun Raster files remains
+    uncompressed.
+
+    In addition to the 1, 8, and 32 bit Sun raster files it is now
+    possible to write 24 files.  The -24 option specifies a 24 bit
+    file, the -32 option specifies a 32 bit file.
+
+
+Histogram linearization
+    Histogram linearization has been added to the '-S' spiff option. 
+    Normally spiff stretches the histogram; if you specify '-Sb'
+    instead of just '-S', then it will linearize the histogram instead. 
+    Histogram linearization can produce significantly better results
+    than histogram stretching for some images.
+
+
+Gamma correction
+    Gamma correction options have been added.  The options are (x is
+    the desired gamma):
+      -Gix  specify input gamma
+      -Gox  specify output gamma
+      -Gpx  specify gamma of palette
+
+    To perform gamma correction, Alchemy needs to know both the input
+    and output gamma.  For some file formats the gamma is known; if
+    you're reading a file with known gamma, such as JPEG, PICT,
+    PCPAINT, or a Targa file with the gamma field, you don't need to
+    specify the input gamma.  Likewise, if you're writing a file which
+    has a fixed gamma, such as JPEG, PICT, or PCPAINT, you don't need
+    to specify an output gamma.  Even if reading or writing a file
+    format which has a known gamma you may override the gamma by using
+    the -Gi or -Go option.
+    
+    However, even if both input and output gamma are known based on the
+    input file and the output format, you must still enable gamma
+    correction for any correction to take place; you can do this with
+    just '-G' (if you had specified input, output, or palette gamma,
+    this would be implied).  This is because there are quite a few
+    images around that have specified or implied gammas that are wrong,
+    which could cause Alchemy to make matters worse instead of better. 
+
+    Typical values for gamma are 1.0 for Macs and 2.2 for PCs.
+
+    For example, to convert the Mac PICT file test.pic, which has a
+    gamma of 1.0, to a PCX file for use on a PC (which should have a
+    gamma of 2.2), use:
+      alchemy -p -Gi1.0 -Go2.2 test.pic
+    The input gamma could have been omitted, as PICT files have an implied
+    gamma of 1.0, but it's best to include it to reduce confusion.
+
+    To convert the file image.tga, which has a gamma of 2.2, to a GIF
+    file for use on a Mac, matching the palette test.pal which was
+    created with a gamma of 1.5:
+      alchemy image.tga -g -Gi2.2 -Go1.0 -Gp1.5 -ftest.pal
+
