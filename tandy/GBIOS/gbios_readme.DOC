@@ -1,0 +1,95 @@
+
+GBIOS release notes 05-07-92
+
+1.0 - Introduction
+
+The Gryphon BIOS will provide a set of services for using some of the
+unique devices in the Gryphon system.  GBIOS (GBIOS.COM) is a TSR
+program that emulates many of the Gryphon BIOS services.
+
+GBIOS implements the functions documented in section 4 of the Gryphon
+BIOS API specification.  This TSR must be executed before using any of
+these funcitons.  GBIOS hooks INT 15h to install the Gryphon BIOS
+services.  Note that if you have a previous version of GBIOS it may
+have been named GBIOS.EXE instead of GBIOS.COM.
+
+GBIOS works with the various development system adapter boards which
+emulate some of the subsystems of the Gryphon system.  These include
+the memory card adapter board, hand controller adapter board, and audio
+adapter board.
+
+GBIOS.COM can accept the following command line parameters.  Command
+line parsing is very primitive so be sure to follow these formats
+precisely.  All caps, no spaces between slashes and equals.
+
+	/HI=x	where x is the IRQ assigned to the hand controller card
+
+	/WI=x	where x is the IRQ assigned to the wave audio card
+
+	/WD=x	where x indicates which DMA channel the wave audio card
+		uses.  x=1 for DMA channel 5, x=2 for DMA channel 6,
+		and x=3 for DMA channel 7.  In other words, x+4 is the
+		DMA channel you want to use.
+
+These defaults are used if the corresponding command line parameter is
+missing.
+
+	hand controller on IRQ 3
+
+	wave audio on IRQ 7 and DMA 7
+
+Problems should be reported through our BBS system.  The BBS number is
+(817) 878-xxxx.  If you do not have an account contact Dennis T. at
+Tandy at (817) 390-xxxx.  If you have problems accessing the BBS,
+contact the sysop Jim Wallace at (817) 390-xxxx.  Of course, if you are
+getting this from the BBS, then you already have this information!
+
+The following sections contain notes on the various services provided
+by GBIOS.  Refer to the Gryphon BIOS API specification February 27,
+1992 for more information.
+
+2.0 - System services (INT15h/AX=7100h)
+
+All the functions are implemented with the following limitations.
+
+Get Equipment List (INT15h/AX=7100h/BH=1) will indicate a keyboard is 
+installed only if a 101-key keyboard is installed.  It will indicate a 
+mouse is installed only if a mouse driver (MOUSE.COM) is installed.  If 
+you loading a mouse driver, MOUSE.COM should be executed before 
+GBIOS.COM.
+
+The information returned by Get System Information
+(INT15h/AX=7100h/BH=3) may change but the general format of the
+information is correct.
+
+3.0 - Hand controller services (INT15h/AX=7101h)
+
+All functions are implemented.
+
+Get Hand Controller Information (INT15h/AX=7101h/BH=0), which can be
+used to reset the hand controller system, will NOT clear the callback
+address as documented in the 02/27/92 API spec.  This is a spec change.
+
+4.0 - Waveform output services.
+
+All functions are implemented.
+
+5.0 - Waveform input services.
+
+All functions are implemented.
+
+Failures are known to occur when recording.  The frequency of the
+failures will vary from system to system.
+
+6.0 - Synthesizer services
+
+None, nothing, zilcho, nill, null, goose egg, no functions are
+implemented.  More information and code updates will be provided as it
+becomes available.
+
+7.0 - Mixer services
+
+All functions are implemented.
+
+8.0 - THE END
+
