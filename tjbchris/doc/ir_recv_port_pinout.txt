@@ -2,7 +2,8 @@
 VIS IR RECIEVER DEV CARD PORT PINOUT
       TJBChris - 10-Jan-2026
 ------------------------------------
-VIS controller communication was successful on J1 with the VIS Hand Control set to SOLO mode using a TSOP38238 IR receiver diode.
+VIS controller communication was successful on J1 with the VIS Hand Control set to SOLO mode using a TSOP38238 IR receiver diode.  
+** THE PORTS ON THIS CARD ARE _NOT_ PS/2 PORTS EVEN THOUGH THEY USE THE CONNECTIOR MOST-ASSOCIATED WITH PS/2 **
 
 J1 (Player 1?)
 1 - Resistor (10k, pullup)
@@ -19,4 +20,5 @@ J4 (Player 2?)
 4 - Resistor / +5V via ISA Pin 29
 5 - NC
 6 - NC
+
 
