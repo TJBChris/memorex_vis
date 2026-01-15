@@ -1,0 +1,22 @@
+------------------------------------
+VIS IR RECIEVER DEV CARD PORT PINOUT
+      TJBChris - 10-Jan-2026
+------------------------------------
+VIS controller communication was successful on J1 with the VIS Hand Control set to SOLO mode using a TSOP38238 IR receiver diode.
+
+J1 (Player 1?)
+1 - Resistor (10k, pullup)
+2 - U1 Pin 8 (Data)
+3 - GND
+4 - Resistor / +5V via ISA Pin 29
+5 - NC
+6 - NC
+
+J4 (Player 2?)
+1 - Resistor (10k, pullup)
+2 - U1 Pin 10 (Data)
+3 - GND
+4 - Resistor / +5V via ISA Pin 29
+5 - NC
+6 - NC
+
